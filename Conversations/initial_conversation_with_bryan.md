@@ -1,752 +1,851 @@
 
-mat-mcloughlin.net
+
+__mat-mcloughlin.net__  
 @Bryan.Watts Looking forward to working on this now
-8:04:33 AM
-__Bryan.Watts__
+_8:04:33 AM_  
+
+__Bryan.Watts__  
 awesome
-8:05:20 AM
+_8:05:20 AM_  
 love something that kick-starts ideas
-8:05:26 AM
-__mat-mcloughlin.net__
+_8:05:26 AM_  
+
+__mat-mcloughlin.net__  
 yeah
-8:05:43 AM
+_8:05:43 AM_  
 wondering whether to use a something pre existing like CD or write my own infra now
-8:06:15 AM
-__Bryan.Watts__
+_8:06:15 AM_  
+
+__Bryan.Watts__  
 cd?
-8:06:31 AM
-__mat-mcloughlin.net__
+_8:06:31 AM_  
+
+__mat-mcloughlin.net__  
 common domain
-8:06:36 AM
-__Bryan.Watts__
+_8:06:36 AM_  
+
+__Bryan.Watts__  
 ah
-8:06:42 AM
+_8:06:42 AM_  
 don't start with someone else's preconceptions
-8:06:49 AM
-​​
-8:06:52 AM
-__mat-mcloughlin.net__
-​​
-8:06:54 AM
+_8:06:49 AM_  
+
+__mat-mcloughlin.net__  
 I wrote my own first time round
-8:07:01 AM
+_8:07:01 AM_  
 normally think its the best way to learn how something works
-8:07:19 AM
-__Bryan.Watts__
+_8:07:19 AM_  
+
+__Bryan.Watts__  
 definitely
-8:07:28 AM
-__mat-mcloughlin.net__
+_8:07:28 AM_  
+
+__mat-mcloughlin.net__  
 but then I always think somebody has probably done it better so I'll use theirs ​​
-8:07:43 AM
-__Bryan.Watts__
+_8:07:43 AM_  
+
+__Bryan.Watts__  
 I'd say, in this case that is your core domain, so it's not what you would farm out. it's the value
-8:07:51 AM
-__mat-mcloughlin.net__
+_8:07:51 AM_  
+
+__mat-mcloughlin.net__  
 this is true
-8:08:03 AM
-__Bryan.Watts__
+_8:08:03 AM_  
+
+__Bryan.Watts__  
 man, those other chapters of DDD turned out to be useful ​​
-8:08:40 AM
+_8:08:40 AM_  
 here's a metaphor
-8:08:52 AM
+_8:08:52 AM_  
 there are some plants that propagate by individual pieces having the ability to grow
-8:09:26 AM
+_8:09:26 AM_  
 i.e. some part falls off and can become its own version of that plant
-8:09:41 AM
+_8:09:41 AM_  
 those plants don't have the opportunity to evolve from scratch
-8:10:17 AM
+_8:10:17 AM_  
 they start in a certain state
-8:10:26 AM
+_8:10:26 AM_  
 the alternative is that each generation is imparted the "output" (genes) of the prior generation
-8:11:12 AM
+_8:11:12 AM_  
 but starts from first principles
-8:11:29 AM
+_8:11:29 AM_  
 the point is
-8:11:32 AM
+_8:11:32 AM_  
 if you want a clone, start as a clipping
-8:11:44 AM
+_8:11:44 AM_  
 if you want to evolve your thinking, start from scratch
-8:11:59 AM
-__mat-mcloughlin.net__
+_8:11:59 AM_  
+
+__mat-mcloughlin.net__  
 good analogy
-8:12:09 AM
+_8:12:09 AM_  
 I wonder where this is going to start
-8:12:52 AM
-__Bryan.Watts__
+_8:12:52 AM_  
+
+__Bryan.Watts__  
 evolutionary psychology is good stuff
-8:13:14 AM
+_8:13:14 AM_  
 if you were to sit down to play a game, what is the first decision you would have to make as a user?
-8:13:25 AM
+_8:13:25 AM_  
 new game
-8:14:04 AM
+_8:14:04 AM_  
 what data goes into that?
-8:14:14 AM
+_8:14:14 AM_  
 opponents?
-8:14:19 AM
+_8:14:19 AM_  
 what data is available out in the world, and what data does the user provide?
-8:14:46 AM
-__mat-mcloughlin.net__
+_8:14:46 AM_  
+
+__mat-mcloughlin.net__  
 the first part is game setup. Joining the game
-8:14:59 AM
-__Bryan.Watts__
+_8:14:59 AM_  
+
+__Bryan.Watts__  
 "the game"
-8:15:07 AM
+_8:15:07 AM_  
 my game?
-8:15:08 AM
+_8:15:08 AM_  
 yours?
-8:15:11 AM
-__mat-mcloughlin.net__
+_8:15:11 AM_  
+
+__mat-mcloughlin.net__  
 I'd say the game
-8:15:53 AM
-__Bryan.Watts__
+_8:15:53 AM_  
+
+__Bryan.Watts__  
 when I say game, I mean instance of the board with specific opponents
-8:17:22 AM
+_8:17:22 AM_  
 is that what you mean by game?
-8:17:28 AM
-__mat-mcloughlin.net__
+_8:17:28 AM_  
+
+__mat-mcloughlin.net__  
 ...
-8:17:49 AM
+_8:17:49 AM_  
 thinking
-8:17:54 AM
-__Bryan.Watts__
+_8:17:54 AM_  
+
+__Bryan.Watts__  
 I want to make sure you didn't mean game as "the entire app"
-8:18:12 AM
-__mat-mcloughlin.net__
+_8:1_8:12 AM_  
+
+__mat-mcloughlin.net__  
 I didn't think
-8:18:17 AM
+_8:1_8:17 AM_  
 I was already starting to think like that
-8:19:00 AM
-in my head. Right Game is the AR... etc.. etc
-8:19:23 AM
-__Bryan.Watts__
+_8:19:00 AM_  
+in my head. Right game is the AR... etc.. etc
+_8:19:23 AM_  
+
+__Bryan.Watts__  
 haha
-8:19:47 AM
+_8:19:47 AM_  
 so, we have the user decision to start a game
-8:20:27 AM
+_8:20:27 AM_  
 requiring specific opponents and possibly other stuff
-8:20:43 AM
-__mat-mcloughlin.net__
+_8:20:43 AM_  
+
+__mat-mcloughlin.net__  
 would you have that rather than start game
-8:20:58 AM
+_8:20:58 AM_  
 then have people join the game
-8:21:04 AM
-__Bryan.Watts__
+_8:21:04 AM_  
+
+__Bryan.Watts__  
 good question
-8:21:17 AM
+_8:21:17 AM_  
 so now we have a different decision forming
-8:21:49 AM
+_8:21:49 AM_  
 host game
-8:21:51 AM
-__mat-mcloughlin.net__
+_8:21:51 AM_  
+
+__mat-mcloughlin.net__  
 yeah, that sounds better
-8:22:14 AM
-__Bryan.Watts__
+_8:22:14 AM_  
+
+__Bryan.Watts__  
 start will happen eventually
-8:22:24 AM
+_8:22:24 AM_  
 but it's not first
-8:22:27 AM
+_8:22:27 AM_  
 I'm thinking of this as, if I were to draw left-to-right the entire timeline of the history of one of these interactions between users
-8:22:51 AM
+_8:22:51 AM_  
 what is that first point going to be?
-8:23:03 AM
+_8:23:03 AM_  
 so, we want to host a game
-8:23:28 AM
+_8:23:28 AM_  
 what kind of data do we have to provide to do so?
-8:23:37 AM
+_8:23:37 AM_  
 game settings
-8:23:59 AM
-__mat-mcloughlin.net__
+_8:23:59 AM_  
+
+__mat-mcloughlin.net__  
 That depends. Rules are defined unless you play alternate rules so there is nothing to specifiy other than to say your going to play
-8:24:52 AM
+_8:24:52 AM_  
 you wouldn't say how many people are playing as that would come from people joining
-8:25:24 AM
-__Bryan.Watts__
+_8:25:24 AM_  
+
+__Bryan.Watts__  
 perfect
-8:25:29 AM
-__mat-mcloughlin.net__
+_8:25:29 AM_  
+
+__mat-mcloughlin.net__  
 but there is a max number of people
-8:25:38 AM
-__Bryan.Watts__
+_8:25:38 AM_  
+
+__Bryan.Watts__  
 public/private?
-8:25:38 AM
+_8:25:38 AM_  
 implying friends
-8:25:41 AM
+_8:25:41 AM_  
 let's keep it public
-8:25:44 AM
+_8:25:44 AM_  
 ok max number of people
-8:26:03 AM
+_8:26:03 AM_  
 let's say we name the room
-8:26:16 AM
+_8:26:16 AM_  
 Risque
-8:26:21 AM
-​​
-8:26:26 AM
+_8:26:21 AM_  
 "I make the decision to host the game 'Risque'"
-8:26:53 AM
+_8:26:53 AM_  
 next decision
-8:27:01 AM
+_8:27:01 AM_  
 joining
-8:27:08 AM
-__mat-mcloughlin.net__
+_8:27:08 AM_  
+
+__mat-mcloughlin.net__  
 inviting?
-8:27:12 AM
-__Bryan.Watts__
+_8:27:12 AM_  
+
+__Bryan.Watts__  
 haha was just typing it
-8:27:23 AM
-__mat-mcloughlin.net__
+_8:27:23 AM_  
+
+__mat-mcloughlin.net__  
 lol
-8:27:29 AM
-__Bryan.Watts__
+_8:27:29 AM_  
+
+__Bryan.Watts__  
 what data would I provide when inviting?
-8:27:39 AM
-__mat-mcloughlin.net__
+_8:27:39 AM_  
+
+__mat-mcloughlin.net__  
 well I don't want to start thinking of this as a network game, so i imagine just name
-8:28:10 AM
-__Bryan.Watts__
+_8:28:10 AM_  
+
+__Bryan.Watts__  
 agreed
-8:28:28 AM
+_8:28:28 AM_  
 so you want to invite Bob
-8:28:32 AM
+_8:28:32 AM_  
 "I decide to invite Bob to 'Risque'"
-8:29:02 AM
+_8:29:02 AM_  
 can people discover?
-8:29:19 AM
+_8:29:19 AM_  
 i.e. Sally decides to join the game independently?
-8:29:34 AM
-__mat-mcloughlin.net__
+_8:29:34 AM_  
+
+__mat-mcloughlin.net__  
 then bob has to either accept or decline
-8:29:47 AM
-__Bryan.Watts__
+_8:29:47 AM_  
+
+__Bryan.Watts__  
 ok good, I was going breadth-first
-8:30:06 AM
-__mat-mcloughlin.net__
+_8:30:06 AM_  
+
+__mat-mcloughlin.net__  
 well if sally asks to join
-8:30:09 AM
+_8:30:09 AM_  
 you then need to say yes or no
-8:30:15 AM
-__Bryan.Watts__
+_8:30:15 AM_  
+
+__Bryan.Watts__  
 it's a totally different decision path, you were spot on there
-8:30:32 AM
+_8:30:32 AM_  
 back to Bob
-8:30:39 AM
+_8:30:39 AM_  
 decisions over data ​​
-8:31:02 AM
+_8:31:02 AM_  
 Bob, through mechanisms undefined, observes the invite
-8:31:32 AM
+_8:31:32 AM_  
 his decision is to accept or decline, as you said
-8:31:49 AM
+_8:31:49 AM_  
 "I decide to join 'Risque' thanks to Mat"
-8:32:17 AM
-__mat-mcloughlin.net__
+_8:32:17 AM_  
+
+__mat-mcloughlin.net__  
 (damn we haven't even started the game yet ​​)
-8:32:27 AM
-__Bryan.Watts__
+_8:32:27 AM_  
+
+__Bryan.Watts__  
 it's collaboration man
-8:32:38 AM
+_8:32:38 AM_  
 more complex than we give it credit for
-8:32:47 AM
+_8:32:47 AM_  
 these are the decisions available to everyone involved while setting up the game
-8:33:23 AM
+_8:33:23 AM_  
 the next is to start the game
-8:33:54 AM
+_8:33:54 AM_  
 what kind of issues could we encounter that would invalidate our decision to start?
-8:34:25 AM
-__mat-mcloughlin.net__
+_8:34:25 AM_  
+
+__mat-mcloughlin.net__  
 I'm just writing this down
-8:34:28 AM
-__Bryan.Watts__
-​​
-8:34:36 AM
+_8:34:28 AM_  
+
+__Bryan.Watts__  
 nobody else wants to play!
-8:34:46 AM
-__mat-mcloughlin.net__
+_8:34:46 AM_  
+
+__mat-mcloughlin.net__  
 got to be at least 2 playes
-8:37:03 AM
+_8:37:03 AM_  
 FYI rules change dependent upon the number of players
-8:37:20 AM
-__Bryan.Watts__
+_8:37:20 AM_  
+
+__Bryan.Watts__  
 is that all they depend on?
-8:37:29 AM
+_8:37:29 AM_  
 i.e. are we missing any switches we might need to flip later?
-8:37:43 AM
-__mat-mcloughlin.net__
+_8:37:43 AM_  
+
+__mat-mcloughlin.net__  
 so if you stick to standard rules that is the only flag I can think of
-8:38:44 AM
-__Bryan.Watts__
+_8:38:44 AM_  
+
+__Bryan.Watts__  
 great
-8:39:11 AM
+_8:39:11 AM_  
 so we can say the decision to start a game is available when the number of plays is at least 2
-8:39:27 AM
+_8:39:27 AM_  
 *players
-8:39:33 AM
+_8:39:33 AM_  
 one last administrative thing
-8:39:51 AM
+_8:39:51 AM_  
 can players leave a game?
-8:40:00 AM
+_8:40:00 AM_  
 and, can they be booted?
-8:40:32 AM
-__mat-mcloughlin.net__
+_8:40:32 AM_  
+
+__mat-mcloughlin.net__  
 they can forfiet
-8:40:33 AM
-__Bryan.Watts__
+_8:40:33 AM_  
+
+__Bryan.Watts__  
 before it starts
-8:40:38 AM
+_8:40:38 AM_  
 we haven't started yet
-8:40:40 AM
+_8:40:40 AM_  
 sorry, regressed a tiny bit
-8:40:46 AM
+_8:40:46 AM_  
 we didn't cover the pre-game decision space
-8:41:08 AM
+_8:41:08 AM_  
 the other decisions, briefly, are "I decide to leave a game before it starts"
-8:41:31 AM
+_8:41:31 AM_  
 "I decide to block another player from this game"
-8:41:55 AM
+_8:41:55 AM_  
 and the last detail
-8:42:09 AM
+_8:42:09 AM_  
 the decision to join a game is available only when the game is not full
-8:42:22 AM
+_8:42:22 AM_  
 *full = players == max players
-8:42:33 AM
+_8:42:33 AM_  
 with me?
-8:42:46 AM
-__mat-mcloughlin.net__
+_8:42:46 AM_  
+
+__mat-mcloughlin.net__  
 yep
-8:42:49 AM
-__Bryan.Watts__
+_8:42:49 AM_  
+
+__Bryan.Watts__  
 now, here's an exercise I probably find more fun than I should
-8:43:07 AM
+_8:43:07 AM_  
 when inviting players, we didn't quite nail down everything
-8:43:21 AM
+_8:43:21 AM_  
 the provided data for that decision is a username
-8:43:52 AM
+_8:43:52 AM_  
 that implies the available data for the decision is the set of usernames
-8:44:05 AM
+_8:44:05 AM_  
 except those already in the game
-8:44:18 AM
+_8:44:18 AM_  
 the decision to invite a user is also available only when the game is not full
-8:45:10 AM
+_8:45:10 AM_  
 therefore, we can summarize
-8:45:19 AM
-__mat-mcloughlin.net__
+_8:45:19 AM_  
+
+__mat-mcloughlin.net__  
 k
-8:45:40 AM
-__Bryan.Watts__
+_8:45:40 AM_  
+
+__Bryan.Watts__  
 The decision to invite a player to a game requires a username, from the set of usernames not already in the game. This decision is available when the game is not full.
-8:46:16 AM
+_8:46:16 AM_  
 what you read there is
-8:46:24 AM
+_8:46:24 AM_  
 command structure, read model, when "enabled"
-8:46:54 AM
-__mat-mcloughlin.net__
+_8:46:54 AM_  
+
+__mat-mcloughlin.net__  
 k
-8:47:01 AM
-__Bryan.Watts__
+_8:47:01 AM_  
+
+__Bryan.Watts__  
 looking back on other decisions
-8:47:24 AM
+_8:47:24 AM_  
 we can say that the decision to start the game requires no data and is available when the game has 2 or more players
-8:47:59 AM
+_8:47:59 AM_  
 the point I'm making, I realize now in a long-winded manner
-8:48:13 AM
+_8:48:13 AM_  
 is that each decision implies the commands, events, and UI
-8:48:43 AM
+_8:48:43 AM_  
 it tells us what we need to see to make the decision
-8:48:52 AM
+_8:48:52 AM_  
 and thus what we need to provide to allow the UI to render so it can provide the decision
-8:49:06 AM
-__mat-mcloughlin.net__
+_8:49:06 AM_  
+
+__mat-mcloughlin.net__  
 yeah
-8:49:24 AM
+_8:49:24 AM_  
 I get that
-8:49:33 AM
-__Bryan.Watts__
+_8:49:33 AM_  
+
+__Bryan.Watts__  
 it also tells us what projections to write ​​
-8:49:39 AM
-__mat-mcloughlin.net__
+_8:49:39 AM_  
+
+__mat-mcloughlin.net__  
 but would you worry about projections at this point?
-8:49:58 AM
-__Bryan.Watts__
+_8:49:58 AM_  
+
+__Bryan.Watts__  
 nope
-8:50:03 AM
+_8:50:03 AM_  
 and good call
-8:50:08 AM
+_8:50:08 AM_  
 really I'm just laying out how I think about commands and what I'm seeing when I say each decision
-8:50:44 AM
+_8:50:44 AM_  
 teach a man to fish and all that
-8:50:50 AM
-__mat-mcloughlin.net__
-​​
-8:50:56 AM
-__Bryan.Watts__
+_8:50:50 AM_  
 let's think about that timeline again
-8:51:35 AM
+_8:51:35 AM_  
 we now know the points on it are: "host game", "invite Bob", "invite Sally", "accept (Bob)", "accept (Sally)"
-8:52:19 AM
+_8:52:19 AM_  
 but that's not right, is it?
-8:52:36 AM
+_8:52:36 AM_  
 really it's "game hosted", "Bob invited", "Sally invited", etc.
-8:52:48 AM
-__mat-mcloughlin.net__
+_8:52:48 AM_  
+
+__mat-mcloughlin.net__  
 the events yes?
-8:53:03 AM
-__Bryan.Watts__
+_8:53:03 AM_  
+
+__Bryan.Watts__  
 right
-8:53:10 AM
+_8:53:10 AM_  
 we started talking in commands
-8:53:15 AM
+_8:53:15 AM_  
 but a timeline is events
-8:53:18 AM
+_8:53:18 AM_  
 the transition is aggregates
-8:53:26 AM
+_8:53:26 AM_  
 so that's the next step
-8:53:30 AM
+_8:53:30 AM_  
 transaction boundaries
-8:53:33 AM
+_8:53:33 AM_  
 hosting a game introduces a new boundary
-8:53:50 AM
+_8:53:50 AM_  
 the gut reaction is to say "well right, a game is a boundary because it's the natural containing thing of all of this"
-8:54:32 AM
-__mat-mcloughlin.net__
+_8:54:32 AM_  
+
+__mat-mcloughlin.net__  
 thats what I was thinking
-8:54:45 AM
-__Bryan.Watts__
+_8:54:45 AM_  
+
+__Bryan.Watts__  
 me too
-8:54:52 AM
+_8:54:52 AM_  
 I started thinking about what I was thinking
-8:54:57 AM
+_8:54:57 AM_  
 so this is off the cuff
-8:55:03 AM
+_8:55:03 AM_  
 but hear me out
-8:55:05 AM
-__mat-mcloughlin.net__
+_8:55:05 AM_  
+
+__mat-mcloughlin.net__  
 go for it
-8:55:12 AM
-__Bryan.Watts__
+_8:55:12 AM_  
+
+__Bryan.Watts__  
 containment is a spatial concept
-8:55:18 AM
+_8:55:18 AM_  
 transaction boundaries are temporal concepts
-8:55:24 AM
+_8:55:24 AM_  
 that's why we mistake entities for aggregates
-8:55:39 AM
-__mat-mcloughlin.net__
+_8:55:39 AM_  
+
+__mat-mcloughlin.net__  
 ok
-8:55:56 AM
-__Bryan.Watts__
-so I'm not going to immediately jump to Game aggregate
-8:56:06 AM
-__mat-mcloughlin.net__
+_8:55:56 AM_  
+
+__Bryan.Watts__  
+so I'm not going to immediately jump to game aggregate
+_8:56:06 AM_  
+
+__mat-mcloughlin.net__  
 so where's your thinking going?
-8:56:10 AM
-__Bryan.Watts__
+_8:56:10 AM_  
+
+__Bryan.Watts__  
 instead, let's think about those decisions
-8:56:12 AM
+_8:56:12 AM_  
 and how they affect each others' data
-8:56:23 AM
+_8:56:23 AM_  
 host game: creates a new boundary
-8:57:08 AM
+_8:57:08 AM_  
 invite user: obviously affected by host game because it is part of the provided data
-8:57:39 AM
+_8:57:39 AM_  
 we have to provide a game with that decision, so invite user is dependent on host game
-8:58:10 AM
+_8:58:10 AM_  
 they belong in the same boundary
-8:58:15 AM
+_8:58:15 AM_  
 next, invite user
-8:58:34 AM
+_8:58:34 AM_  
 we provide the username
-8:59:10 AM
+_8:59:10 AM_  
 so it doesn't require any other data besides the game
-8:59:30 AM
+_8:59:30 AM_  
 so it also belongs in that boundary
-8:59:38 AM
+_8:59:38 AM_  
 how about accept invite
-9:00:00 AM
+_9:00:00 AM_  
 it doesn't require any data, but it does affect the available data for invite user
-9:00:18 AM
+_9:00:18 AM_  
 so it belongs in the same boundary
-9:00:30 AM
+_9:00:30 AM_  
 start game has an issue if there are not at least 2 players, so all the invites affect its data, and it belongs in the same boundary
-9:01:19 AM
-__mat-mcloughlin.net__
+_9:01:19 AM_  
+
+__mat-mcloughlin.net__  
 ...
-9:01:27 AM
-__Bryan.Watts__
+_9:01:27 AM_  
+
+__Bryan.Watts__  
 we have absolutely determined that the set of commands all affect the same boundary
-9:01:38 AM
-__mat-mcloughlin.net__
+_9:01:38 AM_  
+
+__mat-mcloughlin.net__  
 carry on... but this is still leading me to think that game is the boundary
-9:01:50 AM
-__Bryan.Watts__
+_9:01:50 AM_  
+
+__Bryan.Watts__  
 :itsatrap:
-9:02:05 AM
-damn
-9:02:06 AM
+_9:02:05 AM_  
+dAM_  n
+_9:02:06 AM_  
 :ackbar:
-9:02:11 AM
+_9:02:11 AM_  
 ah well
-9:02:15 AM
-__mat-mcloughlin.net__
+_9:02:15 AM_  
+
+__mat-mcloughlin.net__  
 lol
-9:02:16 AM
+_9:02:16 AM_  
 however
-9:02:21 AM
+_9:02:21 AM_  
 is there a distinction between pre game and game?
-9:02:46 AM
-__Bryan.Watts__
+_9:02:46 AM_  
+
+__Bryan.Watts__  
 nailed it
-9:02:52 AM
+_9:02:52 AM_  
 I was working up to making the implicit explicit
-9:02:58 AM
+_9:02:58 AM_  
 by showing that every decision after start game is not in the same boundary
-9:03:07 AM
-__mat-mcloughlin.net__
+_9:03:07 AM_  
+
+__mat-mcloughlin.net__  
 ha, this is good ​​
-9:03:55 AM
-__Bryan.Watts__
+_9:03:55 AM_  
+
+__Bryan.Watts__  
 very
-9:04:17 AM
+_9:04:17 AM_  
 so what do you think of Lobby? or Room?
-9:04:26 AM
-__mat-mcloughlin.net__
+_9:04:26 AM_  
+
+__mat-mcloughlin.net__  
 ...
-9:04:41 AM
+_9:04:41 AM_  
 they feel linked to network gaming
-9:05:01 AM
+_9:05:01 AM_  
 I've been thinking of this as more of people sat around a table or something. But that might not be a bad way to go
-9:05:23 AM
-__Bryan.Watts__
+_9:05:23 AM_  
+
+__Bryan.Watts__  
 well, I play Titanfall constantly so I have seen that distinction become less pronounced ​​
-9:05:32 AM
-__mat-mcloughlin.net__
+_9:05:32 AM_  
+
+__mat-mcloughlin.net__  
 lobby might not be a bad way to go
-9:05:54 AM
-__Bryan.Watts__
+_9:05:54 AM_  
+
+__Bryan.Watts__  
 yeah it's just people getting together to coordinate
-9:06:05 AM
+_9:06:05 AM_  
 doesn't have to imply all the other social crap that usually comes with
-9:06:14 AM
+_9:06:14 AM_  
 I'm thinking Hearthstone or Scrolls or something, where it's a single-player experience over the network
-9:06:44 AM
-__mat-mcloughlin.net__
+_9:06:44 AM_  
+
+__mat-mcloughlin.net__  
 Lobby suggests somewhere you wait. Room might be better
-9:07:06 AM
-__Bryan.Watts__
+_9:07:06 AM_  
+
+__Bryan.Watts__  
 er, feels like single-player
-9:07:06 AM
+_9:07:06 AM_  
 yeah
-9:07:14 AM
+_9:07:14 AM_  
 pre-game works too
-9:07:17 AM
+_9:07:17 AM_  
 I just didn't want to make the classic cart/order mistake ​​
-9:07:26 AM
-__mat-mcloughlin.net__
-​​
-9:07:33 AM
-yeah
-9:07:35 AM
-__Bryan.Watts__
+_9:07:26 AM_  
+
+__mat-mcloughlin.net__  
+​yeah
+_9:07:35 AM_  
+
+__Bryan.Watts__  
 one more thing to point out
-9:07:59 AM
+_9:07:59 AM_  
 we haven't talked for very long, and we've already nailed down basically everything we would need to implement this in any tech stack
-9:08:19 AM
+_9:08:19 AM_  
 (the lobby part)
-9:08:40 AM
-__mat-mcloughlin.net__
+_9:08:40 AM_  
+
+__mat-mcloughlin.net__  
 yep
-9:09:09 AM
-__Bryan.Watts__
+_9:09:09 AM_  
+
+__Bryan.Watts__  
 I just realized I framed you as a client
-9:09:52 AM
+_9:09:52 AM_  
 ha
-9:09:52 AM
-__mat-mcloughlin.net__
+_9:09:52 AM_  
+
+__mat-mcloughlin.net__  
 lol
-9:10:02 AM
+_9:10:02 AM_  
 You've done this too much that its become engrained obviously
-9:10:29 AM
+_9:10:29 AM_  
 ​​
-9:10:31 AM
-__Bryan.Watts__
+_9:10:31 AM_  
+
+__Bryan.Watts__  
 haha
-9:11:05 AM
+_9:11:05 AM_  
 I did my time in consulting...I'm doing product now, but I bet I could go back and kill it
-9:11:19 AM
+_9:11:19 AM_  
 not that I would ​​
-9:11:24 AM
+_9:11:24 AM_  
 this is going to sound insane, and I know it
-9:11:33 AM
+_9:11:33 AM_  
 but the trajectory of my personal project solves consulting on an abstract level
-9:12:19 AM
+_9:12:19 AM_  
 it wasn't the goal
-9:12:31 AM
+_9:12:31 AM_  
 it's a knowledge work engine
-9:12:38 AM
+_9:12:38 AM_  
 it just so happens that a lot of consulting is just collecting and chewing data
-9:13:04 AM
-__mat-mcloughlin.net__
+_9:13:04 AM_  
+
+__mat-mcloughlin.net__  
 yup
-9:14:17 AM
+_9:14:17 AM_  
 this has been good. Think I've got something to start on
-9:14:47 AM
-__Bryan.Watts__
+_9:14:47 AM_  
+
+__Bryan.Watts__  
 definitely
-9:15:23 AM
+_9:15:23 AM_  
 I think it's time for me to finally go to bed
-9:15:32 AM
+_9:15:32 AM_  
 been procrastinating on that ​​
-9:15:38 AM
-__mat-mcloughlin.net__
+_9:15:38 AM_  
+
+__mat-mcloughlin.net__  
 lol
-9:16:11 AM
+_9:16:11 AM_  
 before you finally go, you had one more point?
-9:16:29 AM
-__Bryan.Watts__
+_9:16:29 AM_  
+
+__Bryan.Watts__  
 did I? ha
-9:16:44 AM
+_9:16:44 AM_  
 oh
-9:16:53 AM
+_9:16:53 AM_  
 it was the efficient nature of this design orientation
-9:17:04 AM
+_9:17:04 AM_  
 you would be amazed how much talk in meetings could be just, freakin eliminated
-9:17:31 AM
+_9:17:31 AM_  
 people talking about this data and that data and what about when someone wants to do this with that data
-9:17:53 AM
+_9:17:53 AM_  
 you get on those crazy rabbit holes like the one we almost went on, about game discovery
-9:18:23 AM
+_9:18:23 AM_  
 because we happened to be talking about data that would also be relevant in that decision
-9:18:37 AM
+_9:18:37 AM_  
 looking from the decisions' point of view, these things are fairly unambiguous
-9:18:52 AM
+_9:18:52 AM_  
 so yeah
-9:18:53 AM
+_9:18:53 AM_  
 that
-9:18:54 AM
-​​
-9:18:56 AM
-__mat-mcloughlin.net__
-​​
-9:20:13 AM
-thanks for this man
-9:20:19 AM
+_9:18:54 AM_  
+
+__mat-mcloughlin.net__  
+​thanks for this man
+_9:20:19 AM_  
 appreciate the time
-9:20:24 AM
+_9:20:24 AM_  
 *I
-9:20:27 AM
-__Bryan.Watts__
+_9:20:27 AM_  
+
+__Bryan.Watts__  
 yeah no problem
-9:20:33 AM
+_9:20:33 AM_  
 always looking to sharpen the sword
-9:20:39 AM
+_9:20:39 AM_  
 I find that blogging is very difficult because of the static audience
-9:20:49 AM
+_9:20:49 AM_  
 I like interaction
-9:20:51 AM
-__mat-mcloughlin.net__
+_9:20:51 AM_  
+
+__mat-mcloughlin.net__  
 Yeah
-9:20:59 AM
+_9:20:59 AM_  
 I agree
-9:21:02 AM
+_9:21:02 AM_  
 Although I like to take notes after a conversation like this
-9:21:13 AM
+_9:21:13 AM_  
 So I should probably blog them ​​
-9:21:19 AM
+_9:21:19 AM_  
 FYI https://github.com/mat-mcloughlin/DDD-Risk
-9:21:23 AM
-__Bryan.Watts__
+_9:21:23 AM_  
+
+__Bryan.Watts__  
 awesome
-9:21:51 AM
+_9:21:51 AM_  
 watched
-9:21:52 AM
-__mat-mcloughlin.net__
+_9:21:52 AM_  
+
+__mat-mcloughlin.net__  
 Right. I'm gonna write my first test ​​
-9:22:13 AM
-__Bryan.Watts__
+_9:22:13 AM_  
+
+__Bryan.Watts__  
 nice
-9:22:26 AM
-__mat-mcloughlin.net__
+_9:22:26 AM_  
+
+__mat-mcloughlin.net__  
 And I think you're right
-9:22:35 AM
+_9:22:35 AM_  
 I'm going to try and let the arch flow out of this
-9:22:46 AM
-__Bryan.Watts__
+_9:22:46 AM_  
+
+__Bryan.Watts__  
 (sent to @z3roshot, my cousin)
-9:22:54 AM
+_9:22:54 AM_  
 definitely
-9:23:01 AM
+_9:23:01 AM_  
 I think it will come organically
-9:23:07 AM
+_9:23:07 AM_  
 this can all be done with simple classes
-9:23:14 AM
+_9:23:14 AM_  
 it's really how spread-out and how persistent you want it to be that makes the difference
-9:23:26 AM
+_9:23:26 AM_  
 otherwise command = method and query = property
-9:23:35 AM
+_9:23:35 AM_  
 that's the easiest domain in the world
-9:23:39 AM
-__mat-mcloughlin.net__
+_9:23:39 AM_  
+
+__mat-mcloughlin.net__  
 well I'll just start by raising the events and see where it goes from there
-9:24:24 AM
-__Bryan.Watts__
+_9:24:24 AM_  
+
+__Bryan.Watts__  
 are you thinking event classes?
-9:24:44 AM
+_9:24:44 AM_  
 or an event mechanism?
-9:24:51 AM
-__mat-mcloughlin.net__
+_9:24:51 AM_  
+
+__mat-mcloughlin.net__  
 I'm not sure I understand
-9:25:17 AM
-__Bryan.Watts__
+_9:25:17 AM_  
+
+__Bryan.Watts__  
 hehe sorry
-9:25:26 AM
+_9:25:26 AM_  
 there are 3 flavors of events
-9:25:33 AM
+_9:25:33 AM_  
 .NET raw
-9:25:37 AM
+_9:25:37 AM_  
 IObservable<>
-9:25:41 AM
-__mat-mcloughlin.net__
+_9:25:41 AM_  
+
+__mat-mcloughlin.net__  
 ah
-9:25:44 AM
+_9:25:44 AM_  
 ok
-9:25:46 AM
-__Bryan.Watts__
+_9:25:46 AM_  
+
+__Bryan.Watts__  
 each event gets its own class
-9:25:46 AM
+_9:25:46 AM_  
 so what I'm wondering is, when you publish
-9:25:53 AM
-are you publishing new GameStarted
-9:26:01 AM
+_9:25:53 AM_  
+are you publishing new gameStarted
+_9:26:01 AM_  
 or doing something like "_gameStarted.OnNext(...)"
-9:26:12 AM
+_9:26:12 AM_  
 I guess I am wondering what you meant by "raising the events" ​​
-9:26:22 AM
-__mat-mcloughlin.net__
-GameStarted
-9:26:31 AM
-__Bryan.Watts__
+_9:26:22 AM_  
+
+__mat-mcloughlin.net__  
+gameStarted
+_9:26:31 AM_  
+
+__Bryan.Watts__  
 sweet
-9:26:39 AM
+_9:26:39 AM_  
 corresponding commands
-9:26:44 AM
-__mat-mcloughlin.net__
+_9:26:44 AM_  
+
+__mat-mcloughlin.net__  
 yup
-9:26:49 AM
-__Bryan.Watts__
+_9:26:49 AM_  
+
+__Bryan.Watts__  
 you don't even need aggregates, you can do everything with just those ​​
-9:26:56 AM
+_9:26:56 AM_  
 get those rules right later haha
-9:27:01 AM
-__mat-mcloughlin.net__
+_9:27:01 AM_  
+
+__mat-mcloughlin.net__  
 Right
-9:27:22 AM
+_9:27:22 AM_  
 I'll make a start and you can rip it to shreds at your pleasure ​​
-9:27:38 AM
-__Bryan.Watts__
+_9:27:38 AM_  
+
+__Bryan.Watts__  
 hahahaha
-9:27:49 AM
-__mat-mcloughlin.net__
+_9:27:49 AM_  
+
+__mat-mcloughlin.net__  
 file => new project
-9:27:51 AM
-__Bryan.Watts__
+_9:27:51 AM_  
+
+__Bryan.Watts__  
 you have no idea what you invited yourself into
-9:27:55 AM
-__mat-mcloughlin.net__
+_9:27:55 AM_  
+
+__mat-mcloughlin.net__  
 lol
-9:28:02 AM
+_9:28:02 AM_  
