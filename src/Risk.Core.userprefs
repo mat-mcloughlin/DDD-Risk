@@ -1,0 +1,5 @@
+﻿<Properties>
+  <DisabledProjects>
+    <String>Risk.Core.csproj</String>
+  </DisabledProjects>
+</Properties>
