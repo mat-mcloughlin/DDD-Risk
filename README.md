@@ -20,3 +20,7 @@ Can people leave before the game starts? Can people leave once the game has star
 What is required to start a game? At least 2 players
 
 This is actually pre game rather game, separate boundaries
+
+## Invitation
+
+I should really use a GUID to identify an invitation
