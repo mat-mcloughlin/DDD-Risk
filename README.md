@@ -1,7 +1,7 @@
 DDD-Risk
 ========
 
-## Intial Thoughts
+## Initial Thoughts
 
 Does a player host a game or create a game.
 
