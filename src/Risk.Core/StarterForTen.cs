@@ -41,7 +41,7 @@ namespace Risk.Core
                 () => invitationToken = new Guid("7d9b4a47-b0e3-4aa3-965a-631b5a535de5"));
 
             "When I invite the player"
-                .When(() => preGame.InvitePlayer(playerName, () => invitationToken));
+                .When(() => preGame.InvitePlayer(playerName, invitationToken));
 
             "A user invited event is raised"
                 .Then(() =>
@@ -79,7 +79,7 @@ namespace Risk.Core
                 {
                     playerName = "Bryan";
                     invitationToken = new Guid("7d9b4a47-b0e3-4aa3-965a-631b5a535de5");
-                    preGame.InvitePlayer(playerName, () => invitationToken);
+                    preGame.InvitePlayer(playerName, invitationToken);
                 });
 
             "When they accept the invitation with a valid token"
@@ -108,7 +108,7 @@ namespace Risk.Core
                     {
                         var invitationToken = new Guid();
                         invitationTokens.Add(invitationToken);
-                        preGame.InvitePlayer("Bryan", () => invitationToken);
+                        preGame.InvitePlayer("Bryan", invitationToken);
                     }
                 });
 
@@ -125,6 +125,32 @@ namespace Risk.Core
             "Then I invite one more player an exception is thrown"
                 .Then(() => Assert.Throws<TooManyPlayersException>(() => preGame.AcceptInvitation(playerName, invitationTokens[6])));
         }
+
+        [Scenario]
+        public void user_leaving_pregame(string playerName, Guid invitationToken, PreGame preGame)
+        {
+            "Given a game"
+                .Given(() => preGame = new PreGame("Test"));
+
+            "With an invited player"
+                .And(() =>
+                {
+                    playerName = "Bryan";
+                    invitationToken = new Guid("7d9b4a47-b0e3-4aa3-965a-631b5a535de5");
+                    preGame.InvitePlayer(playerName, invitationToken);
+                });
+
+            "When the player leaves the game"
+                .And(() =>
+                {
+                });
+
+            "A player leaves event is raised"
+                .Then(() =>
+                {
+                });
+        }
+
     }
 
     public class InvalidInvitationToken : Exception
@@ -148,27 +174,36 @@ namespace Risk.Core
 
         public IList<object> Events { get; set; }
 
-        public void InvitePlayer(string playerName, Func<Guid> guidGenerator)
+        public void InvitePlayer(string playerName, Guid invitationToken)
         {
-            var invitationToken = guidGenerator();
             this.sentInvitationTokens.Add(invitationToken);
             this.Events.Add(new PlayerInvited(playerName, invitationToken));
         }
 
         public void AcceptInvitation(string playerName, Guid invitationToken)
         {
-            if (this.numberOfPlayers >= MaxNumberOfPlayers)
-            {
-                throw new TooManyPlayersException();
-            }
+            this.CheckMaxNumberOfPlayersHasntBeenExceded();
 
+            this.CheckInvitationTokenIsValid(invitationToken);
+
+            this.numberOfPlayers++;
+            this.Events.Add(new InvitationAccepted(playerName, invitationToken));
+        }
+
+        private void CheckInvitationTokenIsValid(Guid invitationToken)
+        {
             if (!this.sentInvitationTokens.Contains(invitationToken))
             {
                 throw new InvalidInvitationToken();
             }
+        }
 
-            this.numberOfPlayers++;
-            this.Events.Add(new InvitationAccepted(playerName, invitationToken));
+        private void CheckMaxNumberOfPlayersHasntBeenExceded()
+        {
+            if (this.numberOfPlayers >= MaxNumberOfPlayers)
+            {
+                throw new TooManyPlayersException();
+            }
         }
     }
 
