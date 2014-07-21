@@ -66,7 +66,7 @@ namespace Risk.Core
                 throw new InvalidInvitationToken();
             }
         }
-
+        
         private void CheckMaxNumberOfPlayersHasntBeenExceded()
         {
             if (this.JoinedPlayers.Count >= MaxNumberOfPlayers)

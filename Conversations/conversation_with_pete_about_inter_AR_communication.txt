@@ -1,0 +1,190 @@
+[08:32:33] Pete Smith: Whaguan yo
+[11:24:29] Mathew McLoughlin: hey
+[11:24:48] Mathew McLoughlin: you done anything regarding communication between BC's yet?
+[11:25:02] Pete Smith: I think so
+[11:25:05] Pete Smith: But I'm not sure
+[11:25:08] Mathew McLoughlin: lol
+[11:25:11] Pete Smith: Because it wasn't really tricky at all :)
+[11:25:33] Pete Smith: What are you trying to do?
+[11:25:53] Mathew McLoughlin: lobby.startGame creates a game Aggregate
+[11:26:14] Pete Smith: -_-
+[11:26:29] Mathew McLoughlin: kinda figure its just a case of emitting the event and having a service that then emmits the correct commands
+[11:26:47] Mathew McLoughlin: why the face?
+[11:26:52] Pete Smith: Aggregate
+[11:27:01] Pete Smith: My gut feeling is that actually this isn't a seperate bounded context
+[11:27:09] Mathew McLoughlin: my feeling it is
+[11:27:14] Mathew McLoughlin: :)
+[11:27:31] Pete Smith: Well surely if you need such a transition then that implies you do
+[11:27:41] Mathew McLoughlin: shopping cart to order
+[11:27:51] Pete Smith: Those are two aggregates within the same BC
+[11:28:22] Mathew McLoughlin: that depends
+[11:28:35] Mathew McLoughlin: one could be in a shopping system
+[11:28:36] Pete Smith: Example of BC's in shopping would be maintainance of products vs shopping for products
+[11:28:48] Mathew McLoughlin: one could be in a fufilment system
+[11:29:03] Pete Smith: True true
+[11:30:11] Pete Smith: In that scenario though, surely you would notify a user based on the read model of the first BC, and then the user would have to begin the process in the second
+[11:30:37] Pete Smith: I guess that's equivilent to some kind of service doing the same job mind
+[11:30:40] Mathew McLoughlin: this is what I'm questions
+[11:30:44] Mathew McLoughlin: questioning
+[11:31:03] Mathew McLoughlin: seems the sensible way of doing it but who the fuck knows now-a-days
+[11:31:59] Pete Smith: Here's a question then
+[11:32:06] Pete Smith: Could the game BC function without the pre-game BC?
+[11:32:22] Mathew McLoughlin: sure why not
+[11:32:30] Pete Smith: And in practice?
+[11:32:34] Mathew McLoughlin: yeah
+[11:32:54] Mathew McLoughlin: (changed it to lobby btw)
+[11:33:06] Mathew McLoughlin: why couldn't it
+[11:33:07] Mathew McLoughlin: ?
+[11:33:17] Pete Smith: Where does the info come from in order to start a game?
+[11:33:24] Mathew McLoughlin: an outside source
+[11:33:30] Mathew McLoughlin: who says its going to be the lobbgy
+[11:33:56] Pete Smith: You mean apart from the fact there is no other source currently? :)
+[11:34:02] Pete Smith: I know what you mean though
+[11:34:02] Mathew McLoughlin: yup
+[11:34:17] Pete Smith: Ok so how about this
+[11:34:21] Mathew McLoughlin: ok here's alternative source
+[11:34:22] Pete Smith: No communication between BC
+[11:34:23] Mathew McLoughlin: end of game
+[11:34:26] Pete Smith: Just let the UI do it
+[11:34:28] Mathew McLoughlin: start new game with same players
+[11:34:34] Pete Smith: (y)
+[11:35:00] Mathew McLoughlin: whats the thumbs up for?
+[11:35:33] Pete Smith: Your point about new game with same players
+[11:35:54] Pete Smith: So yeah... can you not make this a UI concern?
+[11:37:42] Mathew McLoughlin: ok, hang on. What do you mean by UI now :)
+[11:38:24] Pete Smith: The regular, normal person's definition :)
+[11:38:33] Mathew McLoughlin: two words
+[11:38:38] Mathew McLoughlin: ubiquitous language
+[11:38:39] Mathew McLoughlin: :)
+[11:38:53] Pete Smith: Well quite
+[11:39:17] Pete Smith: That term is very well established
+[11:39:26] Mathew McLoughlin: you'd think wouldn't you :)
+[11:40:20] Mathew McLoughlin: on another note aggregate = bounded context no?
+[11:40:41] Pete Smith: Can't tell if you're still trolling :)
+[11:40:51] Mathew McLoughlin: nor can I anymore
+[11:40:56] Pete Smith: This is why the use of the term aggregate vs aggregate root is important
+[11:41:08] Mathew McLoughlin: so explain it as you see it
+[11:41:13] Pete Smith: I think most of the time, bc will contain one aggregate
+[11:41:18] Pete Smith: But this is not always the case
+[11:41:27] Mathew McLoughlin: right fine, we are the same on this
+[11:41:49] Pete Smith: The difference I think is
+[11:41:52] Pete Smith: That aggregates can overlap
+[11:42:02] Pete Smith: Such as in that CQRS shop example
+[11:42:08] Pete Smith: There are four aggregate roots
+[11:42:48] Mathew McLoughlin: link it again please
+[11:43:01] Pete Smith: https://github.com/Roysvork/CQRSShop
+[11:43:18] Pete Smith: I don't personally think it's been modelled correctly mind
+[11:43:33] Pete Smith: I don't think product should be an ar or even an entity in this sample
+[11:43:59] Pete Smith: And perhaps basket should be an entity rather than an AR
+[11:44:27] Mathew McLoughlin: shouldnt be an AR but why not entity?
+[11:44:39] Pete Smith: Because in this BC it's a value type
+[11:44:54] Pete Smith: Or even just an id
+[11:45:19] Pete Smith: Perhaps it should be an entity, but certainly it has no behavior
+[11:45:43] Mathew McLoughlin: ... no that's fair enough
+[11:46:02] Pete Smith: There is the use of createproduct event but that is technically from another bounded context
+[11:46:08] Mathew McLoughlin: but then this just has AR's and no entities or value objects
+[11:48:06] Mathew McLoughlin: so back to the original question irrespective of what we consider a BC its still a transition (so to speak) between one AR and another
+[11:48:22] Pete Smith: It is
+[11:48:44] Mathew McLoughlin: I thought Bryan and Yves were hard to speak to... :P
+[11:48:59] Pete Smith: But somewhere along the line there is a 'start game' button right?
+[11:49:08] Mathew McLoughlin: right
+[11:49:15] Pete Smith: Which would be the first command issued to the Game BC
+[11:49:30] Mathew McLoughlin: no, it would be to the lobby
+[11:49:36] Mathew McLoughlin: you'd start the game from the lobby
+[11:49:42] Pete Smith: Why?
+[11:49:52] Mathew McLoughlin: well where else you gonna start it from?
+[11:50:01] Pete Smith: Another game
+[11:50:07] Pete Smith: for the same players :)
+[11:50:11] Mathew McLoughlin: yeah
+[11:50:17] Mathew McLoughlin: this is the way I see it
+[11:50:25] Pete Smith: So DRY would suggest that the Start command goes to the game
+[11:50:50 | Edited 11:51:12] Pete Smith: Lobby exists to collect the data required to populate a startgamecommand
+[11:51:30] Pete Smith: Although other methods of collecting said data also exist
+[11:51:48] Mathew McLoughlin: so you are saying you would making it a UI concern and then just call start on the game AR, pull the players from the "read model" and pass them in?
+[11:52:25] Pete Smith: Yahhhh
+[11:52:40] Mathew McLoughlin: hows consistency going to work here?
+[11:52:41] Pete Smith: I think in fact the BC for the lobby could be entirely client side
+[11:53:04] Pete Smith: Trying to think of anything it would actually need to persist
+[11:53:17] Mathew McLoughlin: what would need to persist?
+[11:53:21] Pete Smith: The lobby
+[11:53:39] Mathew McLoughlin: well where you gonna get the players from if you don't persist something?
+[11:53:50] Pete Smith: They're in memory right?
+[11:54:07] Pete Smith: Because once you leave the lobby... that's it you don't need anything from it anymore
+[11:54:11] Mathew McLoughlin: nope
+[11:54:15] Pete Smith: Either you've created a game or you've abandoned it
+[11:54:29] Mathew McLoughlin: so, explicitly you are saying get them from where to pass in to the game AR?
+[11:54:55] Pete Smith: The lobby is basically just a form
+[11:55:03] Pete Smith: albeit an interactive one
+[11:55:11] Mathew McLoughlin: with business rules
+[11:55:16] Pete Smith: Sure
+[11:55:43] Pete Smith: But nothing that requires persisting... it can be entirely in-memory
+[11:55:59] Pete Smith: It could be a signal-r enabled web app for example
+[11:56:28] Mathew McLoughlin: sure
+[11:56:29] Mathew McLoughlin: why not
+[11:57:12] Mathew McLoughlin: so you are now saying that lobby shouldn't be part of the domain at all?@
+[11:57:23] Pete Smith: No it absolutely is
+[11:57:41] Pete Smith: It's it's own bounded context
+[11:58:05] Pete Smith: Designed and implemented in the usual DDD way
+[11:58:37] Pete Smith: Just entirely in-memory
+[11:58:44] Mathew McLoughlin: thats fine
+[11:58:57] Mathew McLoughlin: where you reading the users from to send to the game?
+[11:59:04] Pete Smith: From the lobby
+[11:59:13] Pete Smith: Or rather the read model
+[11:59:22] Mathew McLoughlin: which is eventually consistent
+[11:59:25] Pete Smith: Which remember is in memory
+[11:59:34] Mathew McLoughlin: its still EC
+[11:59:44] Pete Smith: Why does that matter? Only one player starts the game
+[11:59:59] Mathew McLoughlin: because multiple players have been added to the lobby
+[12:00:19] Pete Smith: And if the leader starts the game before they're in there, they won't be included
+[12:00:21] Mathew McLoughlin: you can't guarantee that the read model has been updated before you start the game in your scenario
+[12:00:37] Pete Smith: It's going to be miliseconds behind at most
+[12:00:43] Mathew McLoughlin: just saying
+[12:01:00] Mathew McLoughlin: So that may be acceptable
+[12:01:13] Mathew McLoughlin: however there has got to be better way
+[12:01:35] Pete Smith: You can enforce the consistency of the model if you wish
+[12:02:52] Pete Smith: Actually I'm not so sure EC would be an issue
+[12:03:09] Mathew McLoughlin: go on
+[12:03:27 | Edited 12:03:30] Pete Smith: If it's a networked game, there's always going to be latency involved
+[12:04:00] Mathew McLoughlin: go on
+[12:04:46] Pete Smith: So just wait for acknowledgement from a new player before raising the event
+[12:05:05] Pete Smith: There's only ever going to be one process raising events anyways
+[12:05:51] Mathew McLoughlin: and that acknowledgement will take place in the lobby
+[12:06:19] Pete Smith: There's a disconnect between what we're both talking about here but I'm not entirely sure what it is
+[12:06:31] Mathew McLoughlin: yeah
+[12:06:34] Mathew McLoughlin: there often is :)
+[12:06:36] Pete Smith: Here's what I see as happening:
+[12:06:59] Pete Smith: Lead player issues CreateLobby command
+[12:07:19] Pete Smith: LobbyCreatedEvent
+PlayerJoinsLobbyEvent
+[12:07:48] Pete Smith: Player 2 queries the read model to find available lobbies
+[12:08:05] Pete Smith: Issues JoinLobby command
+[12:08:09] Pete Smith: PlayerJoinsLobbyEvent
+[12:08:26] Pete Smith: Meanwhile Lead player is setting some things up
+[12:08:39] Pete Smith: issues SetGameDurationCommand
+[12:08:48] Pete Smith: SetMaxArmySizeCommand
+[12:08:59] Pete Smith: players chat a little bit
+[12:09:00] Mathew McLoughlin: etc
+[12:09:11] Pete Smith: Lead player now ready to start the game
+[12:09:44] Mathew McLoughlin: and this is the crux
+[12:09:58] Pete Smith: Issues GameStart command
+[12:10:14] Pete Smith: And that's the lobby story finished
+[12:10:27] Mathew McLoughlin: GameStart on the Lobby?
+[12:10:31] Pete Smith: No, on the Game
+[12:10:34] Pete Smith: sorry
+[12:10:37] Mathew McLoughlin: thats where we see the difference then
+[12:10:50] Mathew McLoughlin: w8
+[12:10:58] Mathew McLoughlin: I see it this way
+[12:11:00] Pete Smith: You'd probably need to close the lobby too
+[12:11:51] Mathew McLoughlin: Lobby shit happens -> Lobby.GameStart -> emits event -> picked up by service -> service creates game -> populates with players (or something like that)
+[12:12:07] Mathew McLoughlin: ... closes lobby :)
+[12:12:22] Pete Smith: Hang on
+[12:12:34] Pete Smith: Aren't we trying to figure out how to solve the issue with that approach?
+[12:12:54] Mathew McLoughlin: yeah
+[12:13:00] Mathew McLoughlin: sorry dude, got a meeting in 5
+[12:13:07] Mathew McLoughlin: I'll be back on in an hour
+[12:13:09] Pete Smith: To which the solution is, send the start command to the game
+[12:13:21] Pete Smith: no problemos
+[12:13:28] Mathew McLoughlin: And I was checking that was a legit solution
+[12:13:29] Mathew McLoughlin: :)
+[12:13:46] Mathew McLoughlin: be back in a hour
+Pete Smith
