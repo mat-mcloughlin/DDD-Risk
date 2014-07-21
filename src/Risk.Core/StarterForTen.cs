@@ -12,23 +12,23 @@
     public class StarterForTen
     {
         [Scenario]
-        public void Creating_a_new_game(string gameName, PreGame preGame)
+        public void Creating_a_new_game(string gameName, Lobby lobby)
         {
             "Given a game name"
                 .Given(() => gameName = "Test");
 
             "When I create a new game"
-                .When(() => preGame = new PreGame(gameName));
+                .When(() => lobby = new Lobby(gameName));
 
-            "A game created with a name"
-                .Then(() => preGame.GameName.ShouldBe(gameName));
+            "A game is created with a name"
+                .Then(() => lobby.GameName.ShouldBe(gameName));
         }
 
         [Scenario]
-        public void Inviting_player_to_game(string playerName, Guid invitationToken, PreGame preGame)
+        public void Inviting_player_to_game(string playerName, Guid invitationToken, Lobby lobby)
         {
             "Given a game"
-                .Given(() => preGame = new PreGame("Test"));
+                .Given(() => lobby = new Lobby("Test"));
 
             "And a player name".And(
                 () => playerName = "Bryan");
@@ -37,17 +37,17 @@
                 () => invitationToken = new Guid("7d9b4a47-b0e3-4aa3-965a-631b5a535de5"));
 
             "When I invite the player"
-                .When(() => preGame.InvitePlayer(playerName, invitationToken));
+                .When(() => lobby.InvitePlayer(playerName, invitationToken));
 
-            "A user invited event is raised"
-                .Then(() => preGame.InvitedPlayers.ShouldContain(new KeyValuePair<Guid, string>(invitationToken, playerName)));
+            "A user is added to the invited players"
+                .Then(() => lobby.InvitedPlayers.ShouldContain(new KeyValuePair<Guid, string>(invitationToken, playerName)));
         }
 
         [Scenario]
-        public void Cannot_accept_invitation_as_not_invited(Guid playerId, string playerName, Guid invitationToken, PreGame preGame)
+        public void Cannot_accept_invitation_as_not_invited(Guid playerId, string playerName, Guid invitationToken, Lobby lobby)
         {
             "Given a game"
-                .Given(() => preGame = new PreGame("Test"));
+                .Given(() => lobby = new Lobby("Test"));
 
             "And a player id".And(
                 () => playerId = new Guid("7d9b4a47-b0e3-4aa3-965a-631b5a535de5"));
@@ -58,40 +58,40 @@
             "And an invalid token"
                 .And(() => invitationToken = Guid.NewGuid());
 
-            "Then throws an error when trying to accept invitation"
-                .Then(() => Assert.Throws<InvalidInvitationToken>(() => preGame.AcceptInvitation(playerId, playerName, invitationToken)));
+            "Then an error is thrown when trying to accept an invitation"
+                .Then(() => Assert.Throws<InvalidInvitationToken>(() => lobby.AcceptInvitation(playerId, playerName, invitationToken)));
         }
 
         [Scenario]
-        public void Accepting_an_invitation_to_game(Guid playerId, string playerName, Guid invitationToken, PreGame preGame)
+        public void Accepting_an_invitation_to_game(Guid playerId, string playerName, Guid invitationToken, Lobby lobby)
         {
             "Given a game"
-                .Given(() => preGame = new PreGame("Test"));
+                .Given(() => lobby = new Lobby("Test"));
 
             "With an invited player"
                 .And(() =>
                     {
                         playerName = "Bryan";
                         invitationToken = new Guid("7d9b4a47-b0e3-4aa3-965a-631b5a535de5");
-                        preGame.InvitePlayer(playerName, invitationToken);
+                        lobby.InvitePlayer(playerName, invitationToken);
                     });
 
             "When they accept the invitation with a valid token"
                 .When(() =>
                     {
                         playerId = new Guid("7d9b4a47-b0e3-4aa3-965a-631b5a535de5");
-                        preGame.AcceptInvitation(playerId, playerName, invitationToken);
+                        lobby.AcceptInvitation(playerId, playerName, invitationToken);
                     });
 
-            "The invitation accepted event is raised"
-                .Then(() => preGame.JoinedPlayers.ShouldContain(new KeyValuePair<Guid, string>(playerId, playerName)));
+            "The player is added to the joined players"
+                .Then(() => lobby.JoinedPlayers.ShouldContain(new KeyValuePair<Guid, string>(playerId, playerName)));
         }
 
         [Scenario]
-        public void When_too_many_people_accept_the_invitation_then_an_exception_is_thrown(string playerName, IList<Guid> invitationTokens, IList<Guid> playerIds, PreGame preGame)
+        public void When_too_many_people_accept_the_invitation_then_an_exception_is_thrown(string playerName, IList<Guid> invitationTokens, IList<Guid> playerIds, Lobby lobby)
         {
             "Given the a game"
-                .Given(() => preGame = new PreGame("Test"));
+                .Given(() => lobby = new Lobby("Test"));
 
             "And 10 invitations"
                 .And(() =>
@@ -101,7 +101,7 @@
                         {
                             var invitationToken = Guid.NewGuid();
                             invitationTokens.Add(invitationToken);
-                            preGame.InvitePlayer("Bryan", invitationToken);
+                            lobby.InvitePlayer("Bryan", invitationToken);
                         }
                     });
 
@@ -109,12 +109,12 @@
                 .When(() =>
                     {
                         playerIds = new List<Guid>();
-                        for (var x = 0; x < 6; x++)
+                        for (var x = 1; x <= 6; x++)
                         {
                             var invitationToken = invitationTokens[x];
                             var playerId = Guid.NewGuid();
                             playerIds.Add(playerId);
-                            preGame.AcceptInvitation(playerId, playerName, invitationToken);
+                            lobby.AcceptInvitation(playerId, playerName, invitationToken);
                         }
                     });
 
@@ -122,15 +122,15 @@
                 .Then(() => Assert.Throws<TooManyPlayersException>(() =>
                     {
                         var playerId = playerIds.First();
-                        preGame.AcceptInvitation(playerId, playerName, invitationTokens[6]);
+                        lobby.AcceptInvitation(playerId, playerName, invitationTokens[6]);
                     }));
         }
 
         [Scenario]
-        public void User_leaving_pregame(Guid playerId, string playerName, Guid invitationToken, PreGame preGame)
+        public void User_leaving_pregame(Guid playerId, string playerName, Guid invitationToken, Lobby lobby)
         {
             "Given a game"
-                .Given(() => preGame = new PreGame("Test"));
+                .Given(() => lobby = new Lobby("Test"));
 
             "With a player"
                 .And(() =>
@@ -138,81 +138,38 @@
                         playerId = new Guid("7d9b4a47-b0e3-4aa3-965a-631b5a535de5");
                         playerName = "Bryan";
                         invitationToken = new Guid("7d9b4a47-b0e3-4aa3-965a-631b5a535de5");
-                        preGame.InvitePlayer(playerName, invitationToken);
-                        preGame.AcceptInvitation(playerId, playerName, invitationToken);
+                        lobby.InvitePlayer(playerName, invitationToken);
+                        lobby.AcceptInvitation(playerId, playerName, invitationToken);
                     });
 
             "When the player leaves the game"
-                .And(() => preGame.LeaveGame(playerId));
+                .And(() => lobby.LeaveGame(playerId));
 
-            "A player left event is raised"
-                .Then(() => preGame.JoinedPlayers.ShouldNotContain(new KeyValuePair<Guid, string>(playerId, playerName)));
+            "Then the player is removed from the joined players"
+                .Then(() => lobby.JoinedPlayers.ShouldNotContain(new KeyValuePair<Guid, string>(playerId, playerName)));
         }
-    }
 
-    public class PreGame
-    {
-        private const int MaxNumberOfPlayers = 6;
-
-        public PreGame(string gameName)
-            : this()
+        [Scenario]
+        [Example(0)]
+        [Example(1)]
+        public void Starting_a_game_with_not_enough_players_throws_exception(int numberOfPlayers, Lobby lobby)
         {
-            this.GameName = gameName;
+            "Given a game"
+                .Given(() => lobby = new Lobby("Test"));
+
+            "With a number of invited and accepted players"
+                .And(() =>
+                {
+                    for (var x = 1; x <= numberOfPlayers; x++)
+                    {
+                        var invitationToken = Guid.NewGuid();
+                        lobby.InvitePlayer("Bryan", invitationToken);
+                        lobby.AcceptInvitation(Guid.NewGuid(), "Bryan", invitationToken);
+                    }
+                });
+
+            "Then an exception is thrown when trying to start the game"
+                .Then(() => Assert.Throws<NotEnoughPlayersException>(() => lobby.StartGame()));
         }
-
-        private PreGame()
-        {
-            this.InvitedPlayers = new Dictionary<Guid, string>();
-            this.JoinedPlayers = new Dictionary<Guid, string>();
-        }
-
-        public string GameName { get; private set; }
-
-        public IDictionary<Guid, string> InvitedPlayers { get; private set; }
-
-        public IDictionary<Guid, string> JoinedPlayers { get; private set; }
-
-        public void InvitePlayer(string playerName, Guid invitationToken)
-        {
-            this.InvitedPlayers.Add(invitationToken, playerName);
-        }
-
-        public void AcceptInvitation(Guid playerId, string playerName, Guid invitationToken)
-        {
-            this.CheckMaxNumberOfPlayersHasntBeenExceded();
-
-            this.CheckInvitationTokenIsValid(invitationToken);
-
-            this.JoinedPlayers.Add(playerId, playerName);
-        }
-
-        public void LeaveGame(Guid playerId)
-        {
-            this.JoinedPlayers.Remove(playerId);
-        }
-
-        private void CheckInvitationTokenIsValid(Guid invitationToken)
-        {
-            if (!this.InvitedPlayers.ContainsKey(invitationToken))
-            {
-                throw new InvalidInvitationToken();
-            }
-        }
-
-        private void CheckMaxNumberOfPlayersHasntBeenExceded()
-        {
-            if (this.JoinedPlayers.Count >= MaxNumberOfPlayers)
-            {
-                throw new TooManyPlayersException();
-            }
-        }
-    }
-
-    public class InvalidInvitationToken : Exception
-    {
-    }
-
-    public class TooManyPlayersException : Exception
-    {
     }
 }
