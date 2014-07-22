@@ -5,27 +5,29 @@ namespace Risk.Core
 
     public class Game
     {
-        public Game(string gameName, IDictionary<Guid, string> players)
+        public Game(string gameName, IDictionary<Guid, string> players, Board board)
         {
             this.Name = gameName;
+            this.Board = board;
             this.Players = new Dictionary<Guid, Player>();
 
             var numberOfStartingUnits = GetNumberOfStartingUnits(players.Count);
 
-            foreach (var player in players)
-            {
-                this.Players.Add(player.Key, new Player(player.Value, numberOfStartingUnits, false));
-            }
-
-            if (players.Count == 2)
-            {
-                this.AddNeutralPlayer();
-            }
+            this.AddPlayers(players, numberOfStartingUnits);
         }
+
+        public Board Board { get; set; }
 
         public string Name { get; private set; }
 
-        public Dictionary<Guid, Player> Players { get; private set; }
+        public IDictionary<Guid, Player> Players { get; private set; }
+
+
+        public void PlaceUnitOnBoard(Guid playerId, string territory)
+        {
+            this.Players[playerId].PlaceUnitOnBoard();
+            this.Board.PlaceUnitOnTerritory(playerId, territory);
+        }
 
         private static int GetNumberOfStartingUnits(int numberOfPlayers)
         {
@@ -43,6 +45,19 @@ namespace Risk.Core
                     return 20;
                 default:
                     throw new TooManyPlayersException();
+            }
+        }
+
+        private void AddPlayers(IDictionary<Guid, string> players, int numberOfStartingUnits)
+        {
+            foreach (var player in players)
+            {
+                this.Players.Add(player.Key, new Player(player.Value, numberOfStartingUnits, false));
+            }
+
+            if (players.Count == 2)
+            {
+                this.AddNeutralPlayer();
             }
         }
 

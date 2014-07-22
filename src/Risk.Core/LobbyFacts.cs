@@ -9,7 +9,7 @@
     using Xunit;
     using Xunit.Should;
 
-    public class StarterForTen
+    public class LobbyFacts
     {
         [Scenario]
         public void Creating_a_new_game(string gameName, Lobby lobby)

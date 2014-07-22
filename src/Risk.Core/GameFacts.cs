@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
 
     using Xbehave;
 
@@ -41,7 +42,7 @@
                     });
 
             "When a game is created"
-                .When(() => game = new Game(gameName, players));
+                .When(() => game = new Game(gameName, players, new Board(new Dictionary<string, Continent>())));
 
             "Then the game is named and players added"
                 .Then(() =>
@@ -84,7 +85,7 @@
                     });
 
             "When a game is created"
-                .When(() => game = new Game(gameName, players));
+                .When(() => game = new Game(gameName, players, new Board(new Dictionary<string, Continent>())));
 
             "Then the each player should have x number of units"
                 .Then(() =>
@@ -114,7 +115,7 @@
                 });
 
             "When a game is created"
-                .When(() => game = new Game(gameName, players));
+                .When(() => game = new Game(gameName, players, new Board(new Dictionary<string, Continent>())));
 
             "Then one neutral should be added with 40 unplaced units"
                 .Then(() =>
@@ -124,70 +125,61 @@
                         neutralPlayers.First().UnplacedUnits.ShouldBe(40);
                     });
         }
-    }
 
-    public class Game
-    {
-        public Game(string gameName, IDictionary<Guid, string> players)
+        [Scenario]
+        public void Player_places_unit_on_map(string continent, string territory, KeyValuePair<Guid, Player> player, TestableGame game)
         {
-            this.Name = gameName;
-            this.Players = new Dictionary<Guid, Player>();
+            var players = new Dictionary<Guid, string>();
 
-            var numberOfStartingUnits = GetNumberOfStartingUnits(players.Count);
+            "Given a game with two players"
+                .Given(() => game = TestableGame.Create("game", 2));
 
-            foreach (var player in players)
+            "And with a player"
+                .And(() => player = game.Players.First());
+
+            "And a territory inside a continent"
+                .And(
+                    () =>
+                    {
+                        territory = "Alaska";
+                        continent = "North America";
+                    });
+
+            "When a player places a unit on that territory"
+                .When(() =>
+                    {
+                        player = game.Players.First();
+                        game.PlaceUnitOnBoard(player.Key, territory);
+                    });
+
+            "Then their unplaced units drops by one and that territory's placed units increase by one, for that player"
+                .Then(
+                    () =>
+                    {
+                        game.Board.Continents[continent].Territories[territory].PlacedUnits.ShouldBe(1);
+                        game.Board.Continents[continent].Territories[territory].OccupyingPlayer.ShouldBe(player.Key);
+                        player.Value.UnplacedUnits.ShouldBe(39);
+                    });
+        }
+
+        public class TestableGame : Game
+        {
+            public TestableGame(string gameName, IDictionary<Guid, string> players)
+                : base(gameName, players, Boards.DefaultBoard)
             {
-                this.Players.Add(player.Key, new Player(player.Value, numberOfStartingUnits, false));
             }
 
-            if (players.Count == 2)
+            public static TestableGame Create(string gameName, int numberOfPlayers)
             {
-                this.AddNeutralPlayer();
+                var players = new Dictionary<Guid, string>();
+                for (var i = 1; i <= numberOfPlayers; i++)
+                {
+                    var guid = Guid.NewGuid();
+                    players.Add(guid, "Bryan" + i);
+                }
+
+                return new TestableGame(gameName, players);
             }
         }
-
-        public string Name { get; private set; }
-
-        public Dictionary<Guid, Player> Players { get; private set; }
-
-        private static int GetNumberOfStartingUnits(int numberOfPlayers)
-        {
-            switch (numberOfPlayers)
-            {
-                case 2:
-                    return 40;
-                case 3:
-                    return 35;
-                case 4:
-                    return 30;
-                case 5:
-                    return 25;
-                case 6:
-                    return 20;
-                default:
-                    throw new TooManyPlayersException();
-            }
-        }
-
-        private void AddNeutralPlayer()
-        {
-            this.Players.Add(Guid.Empty, new Player("Neutral", 40, true));
-        }
-    }
-
-    public class Player
-    {
-        public Player(string name, int numberOfStartingUnits, bool isNeutral)
-        {
-            this.Name = name;
-            this.UnplacedUnits = numberOfStartingUnits;
-            this.IsNeutral = isNeutral;
-        }
-
-        public string Name { get; private set; }
-
-        public int UnplacedUnits { get; private set; }
-
-        public bool IsNeutral { get; private set; }
     }
 }

@@ -14,5 +14,10 @@
         public int UnplacedUnits { get; private set; }
 
         public bool IsNeutral { get; private set; }
+
+        public void PlaceUnitOnBoard()
+        {
+            this.UnplacedUnits--;
+        }
     }
 }
