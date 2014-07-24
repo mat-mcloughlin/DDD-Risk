@@ -30,7 +30,7 @@ The __provided data__ is which territory the unit is being placed.
 The __knowledge__ is a new unit is placed.  
 The __decision__ is available when it is the players turn and when there are territories unoccupied and the game has started.
 
-The player decieds which territory to occupy with a neutral unit.  
+The player __decides__ which territory to occupy with a neutral unit.  
 The __available data__ is which territories haven't been occupied.  
 The __provided data__ is which territory the unit is being placed.  
 The __knowledge__ is a new unit is placed.  
