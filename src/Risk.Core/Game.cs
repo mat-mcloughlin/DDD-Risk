@@ -2,6 +2,7 @@ namespace Risk.Core
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Game
     {
@@ -22,11 +23,17 @@ namespace Risk.Core
 
         public IDictionary<Guid, Player> Players { get; private set; }
 
+        public Guid CurrentPlayersTurn { get; private set; }
 
         public void PlaceUnitOnBoard(Guid playerId, string territory)
         {
             this.Players[playerId].PlaceUnitOnBoard();
             this.Board.PlaceUnitOnTerritory(playerId, territory);
+        }
+
+        public void DecideWhoGoesFirst(Func<int> dice)
+        {
+            this.CurrentPlayersTurn = this.DecideWhoGoesFirst(dice, this.Players);
         }
 
         private static int GetNumberOfStartingUnits(int numberOfPlayers)
@@ -46,6 +53,19 @@ namespace Risk.Core
                 default:
                     throw new TooManyPlayersException();
             }
+        }
+
+        private Guid DecideWhoGoesFirst(Func<int> dice, IDictionary<Guid, Player> players)
+        {
+            foreach (var player in players.Values)
+            {
+                player.RollDice(dice);
+            }
+
+            var highestRoll = this.Players.Max(p => p.Value.LastDiceRoll);
+            var highestScoringPlayers = this.Players.Where(m => m.Value.LastDiceRoll == highestRoll).ToDictionary(m => m.Key, m => m.Value);
+
+            return highestScoringPlayers.Count() == 1 ? highestScoringPlayers.Single().Key : this.DecideWhoGoesFirst(dice, highestScoringPlayers);
         }
 
         private void AddPlayers(IDictionary<Guid, string> players, int numberOfStartingUnits)

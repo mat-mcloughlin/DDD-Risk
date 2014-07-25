@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.InteropServices;
 
     using Xbehave;
 
@@ -129,8 +128,6 @@
         [Scenario]
         public void Player_places_unit_on_map(string continent, string territory, KeyValuePair<Guid, Player> player, TestableGame game)
         {
-            var players = new Dictionary<Guid, string>();
-
             "Given a game with two players"
                 .Given(() => game = TestableGame.Create("game", 2));
 
@@ -138,8 +135,7 @@
                 .And(() => player = game.Players.First());
 
             "And a territory inside a continent"
-                .And(
-                    () =>
+                .And(() =>
                     {
                         territory = "Alaska";
                         continent = "North America";
@@ -153,8 +149,7 @@
                     });
 
             "Then their unplaced units drops by one and that territory's placed units increase by one, for that player"
-                .Then(
-                    () =>
+                .Then(() =>
                     {
                         game.Board.Continents[continent].Territories[territory].PlacedUnits.ShouldBe(1);
                         game.Board.Continents[continent].Territories[territory].OccupyingPlayer.ShouldBe(player.Key);

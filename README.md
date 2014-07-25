@@ -24,3 +24,58 @@ This is actually pre game rather game, separate boundaries
 ## Invitation
 
 I should really use a GUID to identify an invitation
+
+
+#fill: #fff;
+#lineWidth: 2
+
+[Lobby
+|
+gameName: string;
+invitedPlayers: List;
+joinedPlayers: List
+|
+Lobby()
+InvitePlayer()
+AcceptInvitation()
+LeaveLobby()
+StartGameSetup()
+]
+
+[GameSetup
+|
+gameName: string;
+board: Board;
+players: List<Player>
+|
+DecideWhoGoesFirst()
+PlaceUnitOnBoard()
+
+]
+
+[Board
+|
+territories: List<Territory>
+]
+
+[Player
+|
+]
+
+[GameSetup]->[Board]
+[<sender> GameSetup]->[Player]
+
+[name]
+[<abstract> name]
+[<instance> name]
+[<note> name]
+[<package> name]
+[<frame> name]
+[<database> name]
+[<start> name]
+[<end> name]
+[<state> name]
+[<choice> name]
+[<input> name]
+[<sender> name]
+[<receiver> name]

@@ -1,6 +1,6 @@
 The host __decides__ to start a game.  
 The __knowledge__ is the lobby is created.  
-The __provided data__ is the game name. 
+The __provided data__ is the game name.
 This __decision__ is always available.
 
 The host __decides__ to who to invite to the lobby.  
@@ -17,7 +17,7 @@ This __decision__ is available when the player has been invited and the game the
 The player __decides__ to leave the lobby.  
 The __knowledge__ is a player is removed from the game.  
 The __provided data__ is the player.  
-The __decision__ is available when the player is in the lobby. 
+The __decision__ is available when the player is in the lobby.
 
 The host __decides__ to start the game.  
 The __available data__ is the joined players and the game name.  
@@ -61,7 +61,7 @@ The __knowledge__ is whether the attack was successful and how many attacking an
 The __decision__ is available when the attacking player has at least two units in the attacking country, the attacking, the country being attack is adjacent to the attacking country, the attacking country was not conquered this turn, the player has placed all available reinforcements and it's still their turn.
 
 The player __decides__ how many units to place in the conquered territory.  
-The __available data__ is how many units are available to move. 
+The __available data__ is how many units are available to move.
 The __provided data__ is how many units the player wants to move.  
 The __knowledge__ is how many units are left in each territory.  
 The __decision__ is available when the player has conquered a territory and it's still their turn.

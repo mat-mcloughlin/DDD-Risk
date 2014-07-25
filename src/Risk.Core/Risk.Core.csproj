@@ -49,6 +49,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="Boards.cs" />
     <Compile Include="Continent.cs" />
+    <Compile Include="DiceFacts.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameFacts.cs" />
     <Compile Include="InvalidInvitationToken.cs" />
@@ -62,7 +63,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
 </Project>
