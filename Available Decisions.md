@@ -70,7 +70,7 @@ The __player__ _decides_ to __fortify__ a __territory__.
 The _available data_ is how many __units__ the __fortifyiung__ from __territory__ has.  
 The _provided data_ is how many __units__ the __player__ wishes to __fortify__ with and which __territory__ they are __fortifying__.  
 The _knowledge_ is the number of __units__ left in both the __fortifying__ from __territory__ and the __fortified territory__.  
-The _decision_ is available when the two __territories__ are adjacent, they are both __occupied__ by the __player__, and the __player__ has finished __attackin__g and its their __turn__.
+The _decision_ is available when the two __territories__ are adjacent, they are both __occupied__ by the __player__, and the __player__ has finished __attacking__ and its their __turn__.
 
 The __player__ _decides_ to end their __turn__.  
 The _knowledge_ is how many __Risk cards__ they receive and who's __turn__ is next.  
