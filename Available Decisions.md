@@ -34,7 +34,7 @@ The __player__ _decides_ which __territory__ to __occupy__ with a __neutral unit
 The _available data_ is which __territories__ haven't been __occupied__.  
 The _provided data_ is which __territory__ the __infantry unit__ is being placed.  
 The _knowledge_ is a new __infantry unit__ is placed.  
-The _decision_ is available when there are only 2 __players__ in the __game__, when it is the __player__s turn to place a __neutral__ and when there are __territories unoccupied__ and the __game__ has started.
+The _decision_ is available when there are only 2 __players__ in the __game__, when it is the __players__ turn to place a __neutral__ and when there are __territories unoccupied__ and the __game__ has started.
 
 The __player__ _decides_ which __territory__ to __reinforce__.  
 The _available data_ is which __territories__ are __occupied__ by them.  
