@@ -36,11 +36,12 @@
   <ItemGroup>
     <Compile Include="GameCreation\CreateLobby.cs" />
     <Compile Include="GameCreation\Host.cs" />
+    <Compile Include="GameCreation\InvalidInvitationTokenException.cs" />
     <Compile Include="GameCreation\InvitePlayer.cs" />
+    <Compile Include="GameCreation\LobbyIsFullException.cs" />
     <Compile Include="GameCreation\Player.cs" />
     <Compile Include="GameCreation\StartGame.cs" />
     <Compile Include="GameCreation\Lobby.cs" />
-    <Compile Include="GameCreation\LobbyCreated.cs" />
     <Compile Include="GameCreation\AcceptInvitation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
