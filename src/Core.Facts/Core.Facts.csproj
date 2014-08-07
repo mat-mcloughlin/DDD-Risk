@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C764B765-B026-4547-8D02-2929BFF16956}</ProjectGuid>
+    <ProjectGuid>{8D8D37BC-D9F9-4539-A7DA-D780E0CCE731}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core</RootNamespace>
-    <AssemblyName>Core</AssemblyName>
+    <RootNamespace>Core.Facts</RootNamespace>
+    <AssemblyName>Core.Facts</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,16 +32,32 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="Xbehave">
+      <HintPath>..\packages\Xbehave.1.1.0\lib\net45\Xbehave.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions">
+      <HintPath>..\packages\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.should">
+      <HintPath>..\packages\xunit.should.1.1\lib\net35\xunit.should.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameCreation\CreateLobby.cs" />
-    <Compile Include="GameCreation\Host.cs" />
-    <Compile Include="GameCreation\InvitePlayer.cs" />
-    <Compile Include="GameCreation\StartGame.cs" />
-    <Compile Include="GameCreation\Lobby.cs" />
-    <Compile Include="GameCreation\LobbyCreated.cs" />
-    <Compile Include="GameCreation\AcceptInvitation.cs" />
+    <Compile Include="GameCreation\LobbyFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{c764b765-b026-4547-8d02-2929bff16956}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
