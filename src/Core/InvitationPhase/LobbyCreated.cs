@@ -1,10 +1,10 @@
-﻿namespace Core.GameCreation
+﻿namespace Core.InvitationPhase
 {
     using System;
 
-    public class CreateLobby
+    public class LobbyCreated
     {
-        public CreateLobby(string gameName, Guid hostId, string hostName)
+        public LobbyCreated(string gameName, Guid hostId, string hostName)
         {
             this.GameName = gameName;
             this.HostId = hostId;

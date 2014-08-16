@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Core.GameCreation;
+    using Core.InvitationPhase;
 
     using Xbehave;
 
@@ -33,18 +33,17 @@
             "A player should be invited to the list of invited players"
                 .Then(() =>
                     {
-                        lobby.InvitedPlayers.Count.ShouldBe(1);
-                        var player = lobby.InvitedPlayers.Last();
-                        player.Key.ShouldBe(playerId);
-                        player.Value.Name.ShouldBe(playerName);
-                        player.Value.InvitationToken.ShouldBe(invitationToken);
+                        var @event = (PlayerInvited)lobby.Events.Last();
+                        @event.PlayerId.ShouldBe(playerId);
+                        @event.PlayerName.ShouldBe(playerName);
+                        @event.InvitationToken.ShouldBe(invitationToken);
                     });
         }
 
         [Scenario]
         [Example("Mat")]
         [Example("Bryan")]
-        public void Player_can_accept_invitation_to_lobby(string playerName, Guid playerId, Guid invitationToken, Lobby lobby)
+        public void Player_can_accept_invitation_to_lobby(string playerName, Guid invitationToken, Lobby lobby)
         {
             "Given a lobby"
                 .Given(() => lobby = new Lobby(new CreateLobby("gameName", Guid.NewGuid(), "hostName")));
@@ -52,7 +51,7 @@
             "And an invited player"
                 .And(() =>
                     {
-                        playerId = new Guid("8e17de3f-7833-47a6-8f92-cf220cf953e2");
+                        var playerId = new Guid("8e17de3f-7833-47a6-8f92-cf220cf953e2");
                         invitationToken = new Guid("25e4349b-0f0a-479b-a7c7-78ebfb2ada00");
                         var command = new InvitePlayer(playerId, playerName, invitationToken);
                         lobby.Handle(command);
@@ -66,14 +65,10 @@
                     });
 
             "A player should be added to the list of joined players"
-                .Then(
-                    () =>
+                .Then(() =>
                     {
-                        lobby.JoinedPlayers.Count.ShouldBe(1);
-                        var player = lobby.JoinedPlayers.Last();
-                        player.Key.ShouldBe(playerId);
-                        player.Value.Name.ShouldBe(playerName);
-                        player.Value.InvitationToken.ShouldBe(invitationToken);
+                        var @event = (InvitationAccepted)lobby.Events.Last();
+                        @event.InvitationToken.ShouldBe(invitationToken);
                     });
         }
 
@@ -121,7 +116,7 @@
 
                         invitationTokens.Add(invitationToken);
                         var command = new InvitePlayer(playerId, playerName, invitationToken);
-                        lobby.Handle(command);    
+                        lobby.Handle(command);
                     }
                 });
 
@@ -134,12 +129,51 @@
                         lobby.Handle(command);
                     }
                 });
-            
+
             "When another player accepts the invitation a lobby full exception should throw"
                 .When(() =>
                 {
                     var command = new AcceptInvitation(invitationTokens[5]);
                     Assert.Throws<LobbyIsFullException>(() => lobby.Handle(command));
+                });
+        }
+
+        [Scenario]
+        public void Player_can_leave_the_lobby_after_accepting_invitation(Lobby lobby)
+        {
+            var invitationToken = Guid.NewGuid();
+            var playerId = Guid.NewGuid();
+
+            "Given a lobby"
+                .Given(() => lobby = new Lobby(new CreateLobby("gameName", Guid.NewGuid(), "hostName")));
+
+            "And a player who has been invited"
+                .And(() =>
+                {
+                    var playerName = "playerName";
+                    var command = new InvitePlayer(playerId, playerName, invitationToken);
+                    lobby.Handle(command);
+                });
+
+            "And who accepts"
+                .And(() =>
+                {
+                    var command = new AcceptInvitation(invitationToken);
+                    lobby.Handle(command);
+                });
+
+            "When they leave the lobby"
+                .When(() =>
+                {
+                    var command = new LeaveLobby(playerId); 
+                    lobby.Handle(command);
+                });
+
+            "Then a left lobby event should be raised"
+                .Then(() =>
+                {
+                    var @event = (LeftLobby)lobby.Events.Last();
+                    @event.PlayerId.ShouldBe(playerId);
                 });
         }
     }

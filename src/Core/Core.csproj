@@ -34,17 +34,45 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameCreation\CreateLobby.cs" />
-    <Compile Include="GameCreation\Host.cs" />
-    <Compile Include="GameCreation\InvalidInvitationTokenException.cs" />
-    <Compile Include="GameCreation\InvitePlayer.cs" />
-    <Compile Include="GameCreation\LobbyIsFullException.cs" />
-    <Compile Include="GameCreation\Player.cs" />
-    <Compile Include="GameCreation\StartGame.cs" />
-    <Compile Include="GameCreation\Lobby.cs" />
-    <Compile Include="GameCreation\AcceptInvitation.cs" />
+    <Compile Include="InvitationPhase\CreateLobby.cs" />
+    <Compile Include="InvitationPhase\Host.cs" />
+    <Compile Include="InvitationPhase\InvalidInvitationTokenException.cs" />
+    <Compile Include="InvitationPhase\InvitationAccepted.cs" />
+    <Compile Include="InvitationPhase\InvitePlayer.cs" />
+    <Compile Include="InvitationPhase\LeaveLobby.cs" />
+    <Compile Include="InvitationPhase\LeftLobby.cs" />
+    <Compile Include="InvitationPhase\LobbyCreated.cs" />
+    <Compile Include="InvitationPhase\LobbyIsFullException.cs" />
+    <Compile Include="InvitationPhase\Player.cs" />
+    <Compile Include="InvitationPhase\PlayerInvited.cs" />
+    <Compile Include="InvitationPhase\StartGame.cs" />
+    <Compile Include="InvitationPhase\Lobby.cs" />
+    <Compile Include="InvitationPhase\AcceptInvitation.cs" />
+    <Compile Include="Gameplay\AttackTerritory.cs" />
+    <Compile Include="Gameplay\Board.cs" />
+    <Compile Include="Gameplay\Continent.cs" />
+    <Compile Include="Gameplay\EndTurn.cs" />
+    <Compile Include="Gameplay\ExchangeRiskCard.cs" />
+    <Compile Include="Gameplay\FortifyTerritory.cs" />
+    <Compile Include="Gameplay\Game.cs" />
+    <Compile Include="Gameplay\InfantryUnit.cs" />
+    <Compile Include="Gameplay\NeutralPlayer.cs" />
+    <Compile Include="Gameplay\PlaceInfantryUnit.cs" />
+    <Compile Include="Gameplay\Player.cs" />
+    <Compile Include="Gameplay\Territory.cs" />
+    <Compile Include="Gameplay\Turn.cs" />
+    <Compile Include="GameSetup\Board.cs" />
+    <Compile Include="GameSetup\Game.cs" />
+    <Compile Include="GameSetup\InfantryUnit.cs" />
+    <Compile Include="GameSetup\NeutralPlayer.cs" />
+    <Compile Include="GameSetup\PlaceInfantryUnit.cs" />
+    <Compile Include="GameSetup\Player.cs" />
+    <Compile Include="GameSetup\Territory.cs" />
+    <Compile Include="GameSetup\Turn.cs" />
+    <Compile Include="Infrastructure\Topic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

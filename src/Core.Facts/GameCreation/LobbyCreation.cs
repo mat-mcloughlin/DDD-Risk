@@ -1,8 +1,9 @@
 ﻿namespace Core.Facts.GameCreation
 {
     using System;
+    using System.Linq;
 
-    using Core.GameCreation;
+    using Core.InvitationPhase;
 
     using Xbehave;
 
@@ -30,12 +31,14 @@
 
             "A lobby should be created with a game name and host"
                 .Then(() =>
-                {
-                    lobby.ShouldNotBeNull();
-                    lobby.GameName.ShouldBe(gameName);
-                    lobby.Host.Id.ShouldBe(hostId);
-                    lobby.Host.Name.ShouldBe(hostName);
-                });
-        } 
+                    {
+                        lobby.ShouldNotBeNull();
+                        
+                        var @event = (LobbyCreated)lobby.Events.Last();
+                        @event.GameName.ShouldBe(gameName);
+                        @event.HostId.ShouldBe(hostId);
+                        @event.HostName.ShouldBe(hostName);
+                    });
+        }
     }
 }

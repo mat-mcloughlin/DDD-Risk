@@ -1,4 +1,4 @@
-namespace Core.GameCreation
+namespace Core.InvitationPhase
 {
     using System;
 
