@@ -1,6 +1,13 @@
 ﻿namespace Core.GameSetup
 {
-    public class Turn
+    using Core.Infrastructure;
+
+    public class Turn : Topic
     {
+        public Turn(StartTurn command)
+        {
+            
+
+        }
     }
 }

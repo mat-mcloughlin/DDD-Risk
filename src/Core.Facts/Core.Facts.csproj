@@ -46,8 +46,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameCreation\LobbyCreation.cs" />
-    <Compile Include="GameCreation\InvitingAndAcceptingInvitations.cs" />
+    <Compile Include="GameSetup\GameSetupCreation.cs" />
+    <Compile Include="GameSetup\PlayingATurn.cs" />
+    <Compile Include="InvitationPhase\LobbyCreation.cs" />
+    <Compile Include="InvitationPhase\InvitingAndAcceptingInvitations.cs" />
     <Compile Include="Infrastructure\TopicFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

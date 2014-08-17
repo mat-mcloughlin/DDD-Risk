@@ -1,4 +1,4 @@
-﻿namespace Core.Facts.GameCreation
+﻿namespace Core.Facts.InvitationPhase
 {
     using System;
     using System.Linq;

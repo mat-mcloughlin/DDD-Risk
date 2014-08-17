@@ -34,6 +34,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameSetup\StartGame.cs" />
+    <Compile Include="GameSetup\GameStarted.cs" />
+    <Compile Include="GameSetup\StartTurn.cs" />
+    <Compile Include="GameSetup\StateOfTheBoard.cs" />
+    <Compile Include="GameSetup\StateOfTheTerritory.cs" />
+    <Compile Include="GameSetup\TurnStarted.cs" />
     <Compile Include="InvitationPhase\CreateLobby.cs" />
     <Compile Include="InvitationPhase\Host.cs" />
     <Compile Include="InvitationPhase\InvalidInvitationTokenException.cs" />
