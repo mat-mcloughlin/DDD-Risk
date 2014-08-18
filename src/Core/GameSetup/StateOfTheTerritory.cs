@@ -1,12 +1,23 @@
 namespace Core.GameSetup
 {
+    using System;
+
     public class StateOfTheTerritory
     {
-        public StateOfTheTerritory(string territoryName)
+        internal StateOfTheTerritory(int numberOfInfantryUnits, Guid? occupyingPlayerId)
         {
-            this.TerritoryName = territoryName;
+            this.NumberOfInfantryUnits = numberOfInfantryUnits;
+            this.OccupyingPlayerId = occupyingPlayerId;
         }
 
-        public string TerritoryName { get; private set; }
+        public int NumberOfInfantryUnits { get; private set; }
+
+        public Guid? OccupyingPlayerId { get; private set; }
+
+        public void Occupy(Guid playerId)
+        {
+            this.NumberOfInfantryUnits++;
+            this.OccupyingPlayerId = playerId;
+        }
     }
 }

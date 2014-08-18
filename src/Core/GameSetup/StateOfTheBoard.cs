@@ -4,11 +4,11 @@
 
     public class StateOfTheBoard
     {
-        public StateOfTheBoard(IList<StateOfTheTerritory> territories)
+        public StateOfTheBoard(IDictionary<string, StateOfTheTerritory> territories)
         {
             this.Territories = territories;
         }
 
-        public IList<StateOfTheTerritory> Territories { get; private set; }
+        public IDictionary<string, StateOfTheTerritory> Territories { get; private set; }
     }
 }

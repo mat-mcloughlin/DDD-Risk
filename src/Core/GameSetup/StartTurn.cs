@@ -4,17 +4,17 @@
 
     public class StartTurn
     {
-        public StartTurn(Guid playerId, string playerName, StateOfTheBoard stateOfTheBoard)
+        public StartTurn(Guid turnId, Guid playerId, StateOfTheBoardDto stateOfTheBoard)
         {
+            this.TurnId = turnId;
             this.PlayerId = playerId;
-            this.PlayerName = playerName;
             this.StateOfTheBoard = stateOfTheBoard;
         }
 
+        public Guid TurnId { get; private set; }
+
         public Guid PlayerId { get; private set; }
 
-        public string PlayerName { get; private set; }
-
-        public StateOfTheBoard StateOfTheBoard { get; private set; }
+        public StateOfTheBoardDto StateOfTheBoard { get; private set; }
     }
 }

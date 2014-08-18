@@ -34,11 +34,17 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameSetup\InfantryUnitPlaced.cs" />
+    <Compile Include="GameSetup\InvalidTerritoryException.cs" />
     <Compile Include="GameSetup\StartGame.cs" />
     <Compile Include="GameSetup\GameStarted.cs" />
     <Compile Include="GameSetup\StartTurn.cs" />
+    <Compile Include="GameSetup\StateOfTheBoardDto.cs" />
     <Compile Include="GameSetup\StateOfTheBoard.cs" />
+    <Compile Include="GameSetup\StateOfTheTerritoryDto.cs" />
     <Compile Include="GameSetup\StateOfTheTerritory.cs" />
+    <Compile Include="GameSetup\StillUnoccupiedTerritoriesException.cs" />
+    <Compile Include="GameSetup\TerritoryAlreadyOccupiedException.cs" />
     <Compile Include="GameSetup\TurnStarted.cs" />
     <Compile Include="InvitationPhase\CreateLobby.cs" />
     <Compile Include="InvitationPhase\Host.cs" />

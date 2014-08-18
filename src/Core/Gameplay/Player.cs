@@ -1,4 +1,4 @@
-﻿namespace Core.Gameplay
+﻿namespace Core.GamePlay
 {
     public class Player
     {
