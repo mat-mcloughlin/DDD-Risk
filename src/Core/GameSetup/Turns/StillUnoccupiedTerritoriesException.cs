@@ -1,4 +1,4 @@
-namespace Core.Facts.GameSetup
+namespace Core.GameSetup.Turns
 {
     using System;
 

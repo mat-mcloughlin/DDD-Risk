@@ -1,20 +1,20 @@
-﻿namespace Core.GameSetup
+﻿namespace Core.GameSetup.Turns
 {
     using System;
 
     public class StartTurn
     {
-        public StartTurn(Guid turnId, Guid playerId, StateOfTheBoardDto stateOfTheBoard)
+        public StartTurn(Guid turnId, Guid playerId, BoardDto board)
         {
             this.TurnId = turnId;
             this.PlayerId = playerId;
-            this.StateOfTheBoard = stateOfTheBoard;
+            this.Board = board;
         }
 
         public Guid TurnId { get; private set; }
 
         public Guid PlayerId { get; private set; }
 
-        public StateOfTheBoardDto StateOfTheBoard { get; private set; }
+        public BoardDto Board { get; private set; }
     }
 }

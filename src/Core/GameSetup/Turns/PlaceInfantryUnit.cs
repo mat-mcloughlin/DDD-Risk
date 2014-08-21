@@ -1,4 +1,4 @@
-﻿namespace Core.GameSetup
+﻿namespace Core.GameSetup.Turns
 {
     public class PlaceInfantryUnit
     {

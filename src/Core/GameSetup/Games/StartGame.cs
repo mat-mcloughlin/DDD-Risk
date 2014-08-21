@@ -1,21 +1,21 @@
-﻿namespace Core.GameSetup
+﻿namespace Core.GameSetup.Games
 {
     using System;
     using System.Collections.Generic;
 
-    public class GameStarted
+    public class StartGame
     {
-        public GameStarted(Guid gameId, string gameName, IDictionary<Guid, string> players)
+        public StartGame(Guid gameId, string gameName, Dictionary<Guid, string> players)
         {
+            this.Players = players;
             this.GameId = gameId;
             this.GameName = gameName;
-            this.Players = players;
         }
+
+        public Dictionary<Guid, string> Players { get; private set; }
 
         public Guid GameId { get; private set; }
 
         public string GameName { get; private set; }
-
-        public IDictionary<Guid, string> Players { get; private set; }
     }
 }

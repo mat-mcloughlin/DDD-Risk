@@ -1,9 +1,8 @@
-﻿namespace Core.GameSetup
+﻿namespace Core.GameSetup.Turns
 {
     using System;
     using System.Linq;
 
-    using Core.Facts.GameSetup;
     using Core.Infrastructure;
 
     public class Turn : Topic
@@ -12,11 +11,11 @@
 
         private Guid playerId;
 
-        private StateOfTheBoard stateOfBoard;
+        private Board stateOfBoard;
 
         public Turn(StartTurn command)
         {
-            this.Raise(new TurnStarted(command.TurnId, command.PlayerId, command.StateOfTheBoard));
+            this.Raise(new TurnStarted(command.TurnId, command.PlayerId, command.Board));
         }
         
         public void Handle(PlaceInfantryUnit command)
@@ -59,7 +58,7 @@
         {
             this.id = @event.TurnId;
             this.playerId = @event.PlayerId;
-            this.stateOfBoard = (StateOfTheBoard)@event.StateOfTheBoard;
+            this.stateOfBoard = (Board)@event.Board;
         }
 
         private void When(InfantryUnitPlaced @event)

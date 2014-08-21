@@ -34,18 +34,24 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameSetup\InfantryUnitPlaced.cs" />
-    <Compile Include="GameSetup\InvalidTerritoryException.cs" />
-    <Compile Include="GameSetup\StartGame.cs" />
-    <Compile Include="GameSetup\GameStarted.cs" />
-    <Compile Include="GameSetup\StartTurn.cs" />
-    <Compile Include="GameSetup\StateOfTheBoardDto.cs" />
-    <Compile Include="GameSetup\StateOfTheBoard.cs" />
-    <Compile Include="GameSetup\StateOfTheTerritoryDto.cs" />
-    <Compile Include="GameSetup\StateOfTheTerritory.cs" />
-    <Compile Include="GameSetup\StillUnoccupiedTerritoriesException.cs" />
-    <Compile Include="GameSetup\TerritoryAlreadyOccupiedException.cs" />
-    <Compile Include="GameSetup\TurnStarted.cs" />
+    <Compile Include="GameSetup\Dice.cs" />
+    <Compile Include="GameSetup\Games\EndTurn.cs" />
+    <Compile Include="GameSetup\Games\InvalidTurnTokenException.cs" />
+    <Compile Include="GameSetup\Games\Players.cs" />
+    <Compile Include="GameSetup\Games\TooManyPlayersException.cs" />
+    <Compile Include="GameSetup\IDice.cs" />
+    <Compile Include="GameSetup\Turns\InfantryUnitPlaced.cs" />
+    <Compile Include="GameSetup\Turns\InvalidTerritoryException.cs" />
+    <Compile Include="GameSetup\Games\StartGame.cs" />
+    <Compile Include="GameSetup\Games\GameStarted.cs" />
+    <Compile Include="GameSetup\Turns\StartTurn.cs" />
+    <Compile Include="GameSetup\BoardDto.cs" />
+    <Compile Include="GameSetup\Board.cs" />
+    <Compile Include="GameSetup\TerritoryDto.cs" />
+    <Compile Include="GameSetup\Territory.cs" />
+    <Compile Include="GameSetup\Turns\StillUnoccupiedTerritoriesException.cs" />
+    <Compile Include="GameSetup\Turns\TerritoryAlreadyOccupiedException.cs" />
+    <Compile Include="GameSetup\Turns\TurnStarted.cs" />
     <Compile Include="InvitationPhase\CreateLobby.cs" />
     <Compile Include="InvitationPhase\Host.cs" />
     <Compile Include="InvitationPhase\InvalidInvitationTokenException.cs" />
@@ -73,16 +79,16 @@
     <Compile Include="Gameplay\Player.cs" />
     <Compile Include="Gameplay\Territory.cs" />
     <Compile Include="Gameplay\Turn.cs" />
-    <Compile Include="GameSetup\Board.cs" />
-    <Compile Include="GameSetup\Game.cs" />
+    <Compile Include="GameSetup\Games\Game.cs" />
     <Compile Include="GameSetup\InfantryUnit.cs" />
     <Compile Include="GameSetup\NeutralPlayer.cs" />
-    <Compile Include="GameSetup\PlaceInfantryUnit.cs" />
+    <Compile Include="GameSetup\Turns\PlaceInfantryUnit.cs" />
     <Compile Include="GameSetup\Player.cs" />
-    <Compile Include="GameSetup\Territory.cs" />
-    <Compile Include="GameSetup\Turn.cs" />
+    <Compile Include="GameSetup\Turns\Turn.cs" />
     <Compile Include="Infrastructure\Topic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GameSetup\Games\TurnEnded.cs" />
+    <Compile Include="Workflows\TurnWorkFlow.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
