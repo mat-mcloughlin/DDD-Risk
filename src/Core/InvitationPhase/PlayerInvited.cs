@@ -6,9 +6,9 @@
     {
         public PlayerInvited(Guid playerId, string playerName, Guid invitationToken)
         {
-            this.PlayerId = playerId;
-            this.PlayerName = playerName;
-            this.InvitationToken = invitationToken;
+            PlayerId = playerId;
+            PlayerName = playerName;
+            InvitationToken = invitationToken;
         }
 
         public Guid PlayerId { get; private set; }

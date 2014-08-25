@@ -6,8 +6,8 @@
     {
         public Player(string name, Guid invitationToken)
         {
-            this.Name = name;
-            this.InvitationToken = invitationToken;
+            Name = name;
+            InvitationToken = invitationToken;
         }
 
         public string Name { get; private set; }

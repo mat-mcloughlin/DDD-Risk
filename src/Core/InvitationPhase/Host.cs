@@ -6,8 +6,8 @@
     {
         public Host(Guid id, string name)
         {
-            this.Id = id;
-            this.Name = name;
+            Id = id;
+            Name = name;
         }
 
         public string Name { get; private set; }

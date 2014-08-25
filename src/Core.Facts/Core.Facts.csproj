@@ -61,7 +61,6 @@
     <Compile Include="GameSetup\PlayingATurn.cs" />
     <Compile Include="InvitationPhase\InvitingAndAcceptingInvitations.cs" />
     <Compile Include="InvitationPhase\LobbyCreation.cs" />
-    <Compile Include="Infrastructure\TopicFacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

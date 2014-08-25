@@ -16,7 +16,7 @@
 
         public void Observe(GameStarted e)
         {
-            var command = new GameSetup.Games.StartGame(e.GameId, e.GameName, e.JoinedPlayers);
+            var command = new GameSetup.Games.StartGame(e.GameId, e.GameName, e.Players);
             _dispatcher.Dispatch(command);
         }
     }

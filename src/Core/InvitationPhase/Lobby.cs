@@ -55,6 +55,9 @@
 
         public void StartGame()
         {
+            // Make sure min number of players joined (3)
+            var players = _joinedPlayers.Keys.ToList();
+            players.Add(_host.Key);
             RaiseEvent(new GameStarted(_gameId, _gameName, _joinedPlayers.Keys.ToList()));
         }
 

@@ -6,7 +6,7 @@
     {
         public InvitationAccepted(Guid invitationToken)
         {
-            this.InvitationToken = invitationToken;
+            InvitationToken = invitationToken;
         }
 
         public Guid InvitationToken { get; private set; }

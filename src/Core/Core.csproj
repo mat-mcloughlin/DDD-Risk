@@ -52,6 +52,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameId.cs" />
     <Compile Include="GameSetup\Dice.cs" />
     <Compile Include="GameSetup\Games\EndTurn.cs" />
     <Compile Include="GameSetup\Games\InvalidTurnIdException.cs" />

@@ -6,7 +6,7 @@
     {
         public StartGame(Guid lobbyId)
         {
-            this.LobbyId = lobbyId;
+            LobbyId = lobbyId;
         }
 
         public Guid LobbyId { get; set; }
