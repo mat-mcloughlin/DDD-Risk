@@ -4,7 +4,7 @@ namespace Core.GameSetup.Turns
 
     public class TurnStarted
     {
-        public TurnStarted(Guid turnId, Guid playerId, BoardDto board)
+        public TurnStarted(Guid turnId, Guid playerId, Board board)
         {
             this.TurnId = turnId;
             this.PlayerId = playerId;
@@ -13,7 +13,7 @@ namespace Core.GameSetup.Turns
 
         public Guid PlayerId { get; private set; }
 
-        public BoardDto Board { get; set; }
+        public Board Board { get; set; }
 
         public Guid TurnId { get; private set; }
     }

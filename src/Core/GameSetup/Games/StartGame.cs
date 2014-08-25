@@ -5,14 +5,14 @@
 
     public class StartGame
     {
-        public StartGame(Guid gameId, string gameName, Dictionary<Guid, string> players)
+        public StartGame(Guid gameId, string gameName, IList<Guid> players)
         {
-            this.Players = players;
-            this.GameId = gameId;
-            this.GameName = gameName;
+            Players = players;
+            GameId = gameId;
+            GameName = gameName;
         }
 
-        public Dictionary<Guid, string> Players { get; private set; }
+        public IList<Guid> Players { get; private set; }
 
         public Guid GameId { get; private set; }
 

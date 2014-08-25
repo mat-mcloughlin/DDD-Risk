@@ -1,19 +1,20 @@
 ﻿namespace Core.GameSetup
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     public class Board
     {
-        public Board(IDictionary<string, Territory> territories)
+        public Board(ReadOnlyDictionary<string, Territory> territories)
         {
             this.Territories = territories;
         }
 
-        public IDictionary<string, Territory> Territories { get; private set; }
+        public ReadOnlyDictionary<string, Territory> Territories { get; private set; }
 
         public static Board Clear()
         {
-            return new Board(new Dictionary<string, Territory>
+            return new Board(new ReadOnlyDictionary<string, Territory>(new Dictionary<string, Territory>
             {
                 { "Alaska", new Territory() },
                 { "Alberta", new Territory() },
@@ -55,7 +56,7 @@
                 { "Indonesia", new Territory() },
                 { "New Guinea", new Territory() },
                 { "Western Australia", new Territory() }
-            });
+            }));
         }
     }
 }

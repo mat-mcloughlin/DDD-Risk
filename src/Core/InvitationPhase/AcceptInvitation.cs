@@ -4,10 +4,13 @@
 
     public class AcceptInvitation
     {
-        public AcceptInvitation(Guid invitationToken)
+        public AcceptInvitation(Guid lobbyId, Guid invitationToken)
         {
-            this.InvitationToken = invitationToken;
+            LobbyId = lobbyId;
+            InvitationToken = invitationToken;
         }
+
+        public Guid LobbyId { get; private set; }
 
         public Guid InvitationToken { get; private set; }
     }

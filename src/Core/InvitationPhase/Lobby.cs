@@ -4,86 +4,100 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Core.Infrastructure;
+    using CommonDomain.Core;
 
-    public class Lobby : Topic
+    public class Lobby : AggregateBase
     {
-        private const int MaxNumberOfPlayers = 5;
+        const int MaxNumberOfPlayers = 5;
 
-        private readonly Dictionary<Guid, Player> invitedPlayers;
+        readonly Dictionary<Guid, Player> _invitedPlayers;
 
-        private readonly Dictionary<Guid, Player> joinedPlayers;
+        readonly Dictionary<Guid, Player> _joinedPlayers;
 
-        private string gameName;
+        Guid _gameId;
 
-        private Host host;
+        string _gameName;
 
-        public Lobby(CreateLobby command)
+        KeyValuePair<Guid, string> _host;
+
+        public Lobby(Guid lobbyId, Guid gameId, string gameName, Guid hostId, string hostName)
             : this()
         {
-            this.Raise(new LobbyCreated(command.GameName, command.HostId, command.HostName));
+            RaiseEvent(new LobbyCreated(lobbyId, gameId, gameName, hostId, hostName));
         }
 
         private Lobby()
         {
-            this.invitedPlayers = new Dictionary<Guid, Player>();
-            this.joinedPlayers = new Dictionary<Guid, Player>();
+            _invitedPlayers = new Dictionary<Guid, Player>();
+            _joinedPlayers = new Dictionary<Guid, Player>();
         }
 
-        public void Handle(InvitePlayer command)
+        public void InvitePlayer(Guid playerId, string playerName, Guid invitationToken)
         {
-            this.Raise(new PlayerInvited(command.PlayerId, command.PlayerName, command.InvitationToken));
+            RaiseEvent(new PlayerInvited(playerId, playerName, invitationToken));
         }
 
-        public void Handle(AcceptInvitation command)
+        public void AcceptInvitation(Guid invitationToken)
         {
-            this.CheckInvitationTokenIsValid(command.InvitationToken);
-            this.CheckLobbyStillHasRoom();
+            CheckInvitationTokenIsValid(invitationToken);
+            CheckLobbyStillHasRoom();
 
-            this.Raise(new InvitationAccepted(command.InvitationToken));
+            RaiseEvent(new InvitationAccepted(invitationToken));
         }
 
-        public void Handle(LeaveLobby command)
+        public void LeaveLobby(Guid playerId)
         {
-            if (this.joinedPlayers.ContainsKey(command.PlayerId))
+            if (_joinedPlayers.ContainsKey(playerId))
             {
-                this.Raise(new LeftLobby(command.PlayerId));
+                RaiseEvent(new LeftLobby(playerId));
             }
         }
 
-        private void When(LobbyCreated @event)
+        public void StartGame()
         {
-            this.gameName = @event.GameName;
-            this.host = new Host(@event.HostId, @event.HostName);
+            RaiseEvent(new GameStarted(_gameId, _gameName, _joinedPlayers.Keys.ToList()));
         }
 
-        private void When(PlayerInvited @event)
+        void Apply(LobbyCreated e)
         {
-            this.invitedPlayers.Add(@event.PlayerId, new Player(@event.PlayerName, @event.InvitationToken));
+            Id = e.LobbyId;
+            _gameId = e.GameId;
+            _gameName = e.GameName;
+            _host = new KeyValuePair<Guid, string>(e.HostId, e.HostName);
         }
 
-        private void When(InvitationAccepted @event)
+        void Apply(PlayerInvited e)
         {
-            var player = this.invitedPlayers.Single(p => p.Value.InvitationToken == @event.InvitationToken);
-            this.joinedPlayers.Add(player.Key, player.Value);
+            _invitedPlayers.Add(e.PlayerId, new Player(e.PlayerName, e.InvitationToken));
         }
 
-        private void When(LeftLobby @event)
+        void Apply(InvitationAccepted e)
         {
-            this.joinedPlayers.Remove(@event.PlayerId);
+            var player = _invitedPlayers.Single(p => p.Value.InvitationToken == e.InvitationToken);
+            _joinedPlayers.Add(player.Key, player.Value);
         }
 
-        private void CheckLobbyStillHasRoom()
+        void Apply(LeftLobby e)
         {
-            if (this.joinedPlayers.Count >= MaxNumberOfPlayers)
+            _joinedPlayers.Remove(e.PlayerId);
+        }
+
+        void Apply(GameStarted e)
+        {
+            // Stop lobby being modified at this point.
+        }
+
+        void CheckLobbyStillHasRoom()
+        {
+            if (_joinedPlayers.Count >= MaxNumberOfPlayers)
             {
                 throw new LobbyIsFullException();
             }
         }
 
-        private void CheckInvitationTokenIsValid(Guid invitationToken)
+        void CheckInvitationTokenIsValid(Guid invitationToken)
         {
-            var tokens = this.invitedPlayers.Values.Select(p => p.InvitationToken);
+            var tokens = _invitedPlayers.Values.Select(p => p.InvitationToken);
 
             if (!tokens.Contains(invitationToken))
             {

@@ -15,14 +15,8 @@ namespace Core.GameSetup
             this.OccupyingPlayerId = occupyingPlayerId;
         }
 
-        public int NumberOfInfantryUnits { get; private set; }
+        public int NumberOfInfantryUnits { get; set; }
 
-        public Guid? OccupyingPlayerId { get; private set; }
-
-        public void Occupy(Guid playerId)
-        {
-            this.NumberOfInfantryUnits++;
-            this.OccupyingPlayerId = playerId;
-        }
+        public Guid? OccupyingPlayerId { get; set; }
     }
 }

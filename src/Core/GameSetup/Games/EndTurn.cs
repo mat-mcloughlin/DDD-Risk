@@ -4,13 +4,13 @@ namespace Core.GameSetup.Games
 
     public class EndTurn
     {
-        public EndTurn(Guid turnToken, Board board)
+        public EndTurn(Guid turnId, Board board)
         {
-            this.TurnToken = turnToken;
+            this.TurnId = turnId;
             this.Board = board;
         }
 
-        public Guid TurnToken { get; private set; }
+        public Guid TurnId { get; private set; }
 
         public Board Board { get; private set; }
     }

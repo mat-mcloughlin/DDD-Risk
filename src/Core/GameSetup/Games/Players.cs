@@ -6,42 +6,36 @@
 
     public class Players
     {
-        private readonly List<Player> _players;
+        private readonly IDictionary<Guid, int> _players;
 
-        private int _currentPlayer;
-
-        public Players(IEnumerable<KeyValuePair<Guid, string>> players, int numberOfStartingInfantryUnits, Guid currentPlayer)
+        public Players(IEnumerable<Guid> players, int numberOfStartingInfantryUnits)
         {
-            _players = new List<Player>();
-            foreach (var player in players)
-            {
-                _players.Add(new Player(player.Key, player.Value, numberOfStartingInfantryUnits));
-
-                if (player.Key == currentPlayer)
-                {
-                    _currentPlayer = _players.Count - 1;
-                }
-            }
+            _players = players.ToDictionary(p => p, p => numberOfStartingInfantryUnits);
         }
-
-        public Player this[Guid index]
+        
+        public int this[Guid index]
         {
             get
             {
-                return _players.SingleOrDefault(p => p.Id == index);
+                return _players[index];
+            }
+
+            set
+            {
+                _players[index] = value;
             }
         }
 
-        public Player Next()
+        public Guid Next(Guid currentPlayer)
         {
-            var nextIndex = _currentPlayer == _players.Count - 1 ? 0 : _currentPlayer + 1;
-            _currentPlayer = nextIndex;
-            return _players[nextIndex];
+            var currentPlayerIndex = _players.Keys.ToList().IndexOf(currentPlayer);
+            var nextPlayerIndex = currentPlayerIndex == _players.Count - 1 ? 0 : currentPlayerIndex + 1;
+            return _players.Keys.ToList()[nextPlayerIndex];
         }
 
         public bool StillHaveInfantryUnitsLeft()
         {
-            return _players.Any(p => p.InfantryUnitsLeft > 0);
+            return _players.Values.Any(p => p > 0);
         }
     }
 }

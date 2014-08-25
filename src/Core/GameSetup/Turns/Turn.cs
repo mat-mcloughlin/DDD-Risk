@@ -1,69 +1,69 @@
-﻿namespace Core.GameSetup.Turns
-{
-    using System;
-    using System.Linq;
+﻿//namespace Core.GameSetup.Turns
+//{
+//    using System;
+//    using System.Linq;
 
-    using Core.Infrastructure;
+//    using Core.Infrastructure;
 
-    public class Turn : Topic
-    {
-        private Guid id;
+//    public class Turn : Topic
+//    {
+//        Guid _id;
 
-        private Guid playerId;
+//        Guid _playerId;
 
-        private Board stateOfBoard;
+//        Board _board;
 
-        public Turn(StartTurn command)
-        {
-            this.Raise(new TurnStarted(command.TurnId, command.PlayerId, command.Board));
-        }
-        
-        public void Handle(PlaceInfantryUnit command)
-        {
-            this.CheckTerritoryExists(command.Territory);
-            this.CheckTerritoryIsntOccupied(command.Territory);
-            this.CheckAllTerritoriesOccupiedBeforeReinforcingTerritory(command.Territory);
-            this.Raise(new InfantryUnitPlaced(this.id, command.Territory));
-        }
+//        public Turn(StartTurn command)
+//        {
+//            Raise(new TurnStarted(command.TurnId, command.PlayerId, command.Board));
+//        }
 
-        private void CheckAllTerritoriesOccupiedBeforeReinforcingTerritory(string territory)
-        {
-            if (this.stateOfBoard.Territories[territory].NumberOfInfantryUnits > 0)
-            {
-                var numberOfUnoccupiedTerritories = this.stateOfBoard.Territories.Values.Count(t => t.NumberOfInfantryUnits == 0);
-                if (numberOfUnoccupiedTerritories > 0)
-                {
-                    throw new StillUnoccupiedTerritoriesException();
-                }
-            }
-        }
+//        public void Handle(PlaceInfantryUnit command)
+//        {
+//            CheckTerritoryExists(command.Territory);
+//            CheckTerritoryIsntOccupied(command.Territory);
+//            CheckAllTerritoriesOccupiedBeforeReinforcingTerritory(command.Territory);
+//            Raise(new InfantryUnitPlaced(_id, command.Territory));
+//        }
 
-        private void CheckTerritoryIsntOccupied(string territory)
-        {
-            if (this.stateOfBoard.Territories[territory].OccupyingPlayerId != this.playerId)
-            {
-                throw new TerritoryAlreadyOccupiedException();
-            }
-        }
+//        void When(TurnStarted @event)
+//        {
+//            this._id = @event.TurnId;
+//            this._playerId = @event.PlayerId;
+//            this._board = @event.Board;
+//        }
 
-        private void CheckTerritoryExists(string territory)
-        {
-            if (!this.stateOfBoard.Territories.Keys.Contains(territory))
-            {
-                throw new InvalidTerritoryException();
-            }
-        }
+//        void When(InfantryUnitPlaced @event)
+//        {
+//            this._board.Territories[@event.Territory].Occupy(this._playerId);
+//        }
 
-        private void When(TurnStarted @event)
-        {
-            this.id = @event.TurnId;
-            this.playerId = @event.PlayerId;
-            this.stateOfBoard = (Board)@event.Board;
-        }
+//        void CheckAllTerritoriesOccupiedBeforeReinforcingTerritory(string territory)
+//        {
+//            if (_board.Territories[territory].NumberOfInfantryUnits > 0)
+//            {
+//                var numberOfUnoccupiedTerritories = _board.Territories.Values.Count(t => t.NumberOfInfantryUnits == 0);
+//                if (numberOfUnoccupiedTerritories > 0)
+//                {
+//                    throw new StillUnoccupiedTerritoriesException();
+//                }
+//            }
+//        }
 
-        private void When(InfantryUnitPlaced @event)
-        {
-            this.stateOfBoard.Territories[@event.Territory].Occupy(this.playerId);
-        }
-    }
-}
+//        void CheckTerritoryIsntOccupied(string territory)
+//        {
+//            if (_board.Territories[territory].OccupyingPlayerId != _playerId)
+//            {
+//                throw new TerritoryAlreadyOccupiedException();
+//            }
+//        }
+
+//        void CheckTerritoryExists(string territory)
+//        {
+//            if (!_board.Territories.Keys.Contains(territory))
+//            {
+//                throw new InvalidTerritoryException();
+//            }
+//        }
+//    }
+//}

@@ -4,7 +4,7 @@
 
     public class StartTurn
     {
-        public StartTurn(Guid turnId, Guid playerId, BoardDto board)
+        public StartTurn(Guid turnId, Guid playerId, Board board)
         {
             this.TurnId = turnId;
             this.PlayerId = playerId;
@@ -15,6 +15,6 @@
 
         public Guid PlayerId { get; private set; }
 
-        public BoardDto Board { get; private set; }
+        public Board Board { get; private set; }
     }
 }

@@ -4,40 +4,39 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using Core.Infrastructure;
+    using CommonDomain.Core;
 
-    public class Game : Topic
+    using Core.GameSetup.Turns;
+
+    public class Game : AggregateBase
     {
-        Guid _id;
+        Guid _gameId;
 
         Players _players;
 
-        string _name;
-
-        Guid _currentPlayer;
+        Guid _currentPlayerId;
 
         Board _board;
 
-        private Guid _currentTurnToken;
-
-        public Game(StartGame c, IDice dice, Func<Guid> generateGuid)
+        public Game(Guid replaceMe, Guid gameId, IList<Guid> players, IDice dice)
         {
-            var startingPlayer = RollDiceUntilWinner(c.Players.Keys, dice);
-            var numberOfStartingInfantryUnits = GetStartingInfantryUnits(c.Players.Count);
-            var turnToken = generateGuid();
+            var startingPlayer = RollDiceUntilWinner(players, dice);
+            var numberOfStartingInfantryUnits = GetStartingInfantryUnits(players.Count);
 
-            Raise(new GameStarted(c.GameId, c.GameName, c.Players, startingPlayer, Board.Clear(), numberOfStartingInfantryUnits, turnToken));
+            RaiseEvent(new GameStarted(replaceMe, gameId, players, startingPlayer, Board.Clear(), numberOfStartingInfantryUnits));
         }
 
-        public void Handle(EndTurn c, Func<Guid> generateGuid)
+        public void PlaceInfantryUnit(Guid playerId, string territory)
         {
-            CheckTurnTokenIsValid(c.TurnToken);
+            CheckPlayerIsCurrentPlayer(playerId);
+            CheckTerritoryExists(territory);
+            CheckTerritoryIsntOccupied(playerId, territory);
+            CheckAllTerritoriesOccupiedBeforeReinforcingTerritory(territory);
 
             if (_players.StillHaveInfantryUnitsLeft())
             {
-                var nextPlayer = _players.Next();
-                var turnToken = generateGuid();
-                Raise(new TurnEnded(turnToken, _currentPlayer, nextPlayer.Id, c.Board, nextPlayer.InfantryUnitsLeft));
+                var nextPlayer = _players.Next(playerId);
+                RaiseEvent(new InfantryUnitPlaced(_currentPlayerId, nextPlayer, territory));
             }
             else
             {
@@ -45,28 +44,29 @@
             }
         }
 
-        void When(GameStarted e)
+        void Handle(GameStarted e)
         {
-            _id = e.GameId;
-            _players = new Players(e.Players, e.NumberOfStartingInfantryUnits, e.StartingPlayer);
-            _name = e.GameName;
-            _currentPlayer = e.StartingPlayer;
-            _currentTurnToken = e.TurnToken;
+            Id = e.ReplaceMe;
+            _gameId = e.GameId;
+            _players = new Players(e.Players, e.NumberOfStartingInfantryUnits);
+            _currentPlayerId = e.StartingPlayerId;
             _board = e.Board;
         }
 
-        void When(TurnEnded e)
+        void Handle(InfantryUnitPlaced e)
         {
-            _board = e.Board;
-            _players[e.CurrentPlayer].RemoveInfantryUnit();
-            _currentPlayer = e.NextPlayer;
+            _board.Territories[e.Territory].OccupyingPlayerId = e.CurrentPlayerId;
+            _board.Territories[e.Territory].NumberOfInfantryUnits++;
+            _players[e.CurrentPlayerId]--;
+
+            _currentPlayerId = e.NextPlayer;
         }
 
-        void CheckTurnTokenIsValid(Guid turnToken)
+        void CheckPlayerIsCurrentPlayer(Guid playerId)
         {
-            if (this._currentTurnToken != turnToken)
+            if (playerId != this._currentPlayerId)
             {
-                throw new InvalidTurnTokenException();
+                throw new NotPlayersTurnException();
             }
         }
 
@@ -99,6 +99,34 @@
                 .ToList();
 
             return highestRollers.Count() == 1 ? highestRollers.Single() : RollDiceUntilWinner(highestRollers, dice);
+        }
+
+        void CheckTerritoryExists(string territory)
+        {
+            if (!_board.Territories.Keys.Contains(territory))
+            {
+                throw new InvalidTerritoryException();
+            }
+        }
+
+        void CheckTerritoryIsntOccupied(Guid playerId, string territory)
+        {
+            if (_board.Territories[territory].OccupyingPlayerId != playerId)
+            {
+                throw new TerritoryAlreadyOccupiedException();
+            }
+        }
+
+        void CheckAllTerritoriesOccupiedBeforeReinforcingTerritory(string territory)
+        {
+            if (_board.Territories[territory].NumberOfInfantryUnits > 0)
+            {
+                var stillUnoccupiedTerritories = _board.Territories.Values.Any(t => t.NumberOfInfantryUnits == 0);
+                if (stillUnoccupiedTerritories)
+                {
+                    throw new StillUnoccupiedTerritoriesException();
+                }
+            }
         }
     }
 }
