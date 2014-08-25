@@ -4,14 +4,14 @@
 
     public class Player
     {
-        public Player(string name, Guid invitationToken)
+        public Player(Guid id, string name)
         {
             Name = name;
-            InvitationToken = invitationToken;
+            Id = id;
         }
 
         public string Name { get; private set; }
 
-        public Guid InvitationToken { get; private set; }
+        public Guid Id { get; private set; }
     }
 }

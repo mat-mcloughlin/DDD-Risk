@@ -2,6 +2,6 @@
 {
     public interface IObserve<in T> where T : class
     {
-        void Observe(T @event);
+        void Observe(T e);
     }
 }

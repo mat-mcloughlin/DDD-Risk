@@ -5,17 +5,20 @@
 
     public class GameStarted
     {
-        public GameStarted(Guid gameId, string gameName, List<Guid> players)
+        public GameStarted(Guid setupGameId, Guid gameId, string gameName, List<Guid> players)
         {
-           GameId = gameId;
-           GameName = gameName;
-           Players = players;
+            SetupGameId = setupGameId;
+            GameId = gameId;
+            GameName = gameName;
+            Players = players;
         }
 
-        public Guid GameId { get; set; }
+        public Guid GameId { get; private set; }
 
-        public string GameName { get; set; }
+        public string GameName { get; private set; }
 
         public List<Guid> Players { get; private set; }
+
+        public Guid SetupGameId { get; private set; }
     }
 }

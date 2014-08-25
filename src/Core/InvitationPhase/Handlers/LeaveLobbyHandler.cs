@@ -15,10 +15,10 @@
             _repository = repository;
         }
 
-        public void Handle(LeaveLobby command)
+        public void Handle(LeaveLobby c)
         {
-            var lobby = _repository.GetById<Lobby>(command.LobbyId);
-            lobby.LeaveLobby(command.PlayerId);
+            var lobby = _repository.GetById<Lobby>(c.LobbyId);
+            lobby.LeaveLobby(c.PlayerId);
             _repository.Save(lobby, Guid.NewGuid());
         }
     }

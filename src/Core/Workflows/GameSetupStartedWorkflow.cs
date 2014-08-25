@@ -3,7 +3,9 @@
     using System;
 
     using Core.Infrastructure;
-    using Core.InvitationPhase;
+    using Core.SetupPhase;
+
+    using GameStarted = Core.InvitationPhase.GameStarted;
 
     public class GameSetupStartedWorkflow : IObserve<GameStarted>
     {
@@ -16,7 +18,7 @@
 
         public void Observe(GameStarted e)
         {
-            var command = new GameSetup.Games.StartGame(e.GameId, e.GameName, e.Players);
+            var command = new StartGameSetup(e.SetupGameId, e.GameId, e.GameName, e.Players);
             _dispatcher.Dispatch(command);
         }
     }

@@ -48,28 +48,37 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Raven.Abstractions">
+      <HintPath>..\packages\RavenDB.Client.2.5.2916\lib\net45\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\packages\RavenDB.Client.2.5.2916\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameId.cs" />
-    <Compile Include="GameSetup\Dice.cs" />
-    <Compile Include="GameSetup\Games\EndTurn.cs" />
-    <Compile Include="GameSetup\Games\InvalidTurnIdException.cs" />
-    <Compile Include="GameSetup\Games\NotPlayersTurnException.cs" />
-    <Compile Include="GameSetup\Games\Players.cs" />
-    <Compile Include="GameSetup\Games\TooManyPlayersException.cs" />
-    <Compile Include="GameSetup\IDice.cs" />
-    <Compile Include="GameSetup\Turns\InfantryUnitPlaced.cs" />
-    <Compile Include="GameSetup\Turns\InvalidTerritoryException.cs" />
-    <Compile Include="GameSetup\Games\StartGame.cs" />
-    <Compile Include="GameSetup\Games\GameStarted.cs" />
-    <Compile Include="GameSetup\Turns\StartTurn.cs" />
-    <Compile Include="GameSetup\Board.cs" />
-    <Compile Include="GameSetup\Territory.cs" />
-    <Compile Include="GameSetup\Turns\StillUnoccupiedTerritoriesException.cs" />
-    <Compile Include="GameSetup\Turns\TerritoryAlreadyOccupiedException.cs" />
-    <Compile Include="GameSetup\Turns\TurnStarted.cs" />
+    <Compile Include="SetupPhase\Dice.cs" />
+    <Compile Include="SetupPhase\Exceptions\NotPlayersTurnException.cs" />
+    <Compile Include="SetupPhase\Handlers\PlaceInfantryUnitHandler.cs" />
+    <Compile Include="SetupPhase\Handlers\StartGameSetupHandler.cs" />
+    <Compile Include="SetupPhase\PlaceInfantryUnit.cs" />
+    <Compile Include="SetupPhase\Players.cs" />
+    <Compile Include="SetupPhase\Exceptions\InvalidNumberOfPlayersException.cs" />
+    <Compile Include="SetupPhase\IDice.cs" />
+    <Compile Include="SetupPhase\Exceptions\InvalidTerritoryException.cs" />
+    <Compile Include="SetupPhase\DTO\BoardStateDTO.cs" />
+    <Compile Include="SetupPhase\Projections\InfantryUnitPlacedProjection.cs" />
+    <Compile Include="SetupPhase\Projections\GameSetupStartedProjection.cs" />
+    <Compile Include="SetupPhase\DTO\TerritoryDTO.cs" />
+    <Compile Include="SetupPhase\StartGameSetup.cs" />
+    <Compile Include="SetupPhase\GameSetupStarted.cs" />
+    <Compile Include="SetupPhase\Board.cs" />
+    <Compile Include="SetupPhase\Territory.cs" />
+    <Compile Include="SetupPhase\Exceptions\StillUnoccupiedTerritoriesException.cs" />
+    <Compile Include="SetupPhase\Exceptions\TerritoryAlreadyOccupiedException.cs" />
     <Compile Include="Infrastructure\AggregateDeletedException.cs" />
     <Compile Include="Infrastructure\AggregateNotFoundException.cs" />
     <Compile Include="Infrastructure\AggregateVersionException.cs" />
@@ -89,44 +98,35 @@
     <Compile Include="InvitationPhase\Handlers\AcceptInvitationHandler.cs" />
     <Compile Include="InvitationPhase\Handlers\CreateLobbyHandler.cs" />
     <Compile Include="InvitationPhase\Host.cs" />
-    <Compile Include="InvitationPhase\InvalidInvitationTokenException.cs" />
+    <Compile Include="InvitationPhase\Exceptions\InvalidInvitationTokenException.cs" />
     <Compile Include="InvitationPhase\InvitationAccepted.cs" />
     <Compile Include="InvitationPhase\InvitePlayer.cs" />
     <Compile Include="InvitationPhase\LeaveLobby.cs" />
     <Compile Include="InvitationPhase\LeftLobby.cs" />
     <Compile Include="InvitationPhase\LobbyCreated.cs" />
-    <Compile Include="InvitationPhase\LobbyIsFullException.cs" />
+    <Compile Include="InvitationPhase\Exceptions\LobbyIsFullException.cs" />
+    <Compile Include="InvitationPhase\Exceptions\NotEnoughPlayersException.cs" />
     <Compile Include="InvitationPhase\Player.cs" />
     <Compile Include="InvitationPhase\PlayerInvited.cs" />
+    <Compile Include="InvitationPhase\Projections\InvitationAcceptedProjection.cs" />
+    <Compile Include="InvitationPhase\Projections\LeftLobbyProjection.cs" />
+    <Compile Include="InvitationPhase\Projections\LobbyCreatedProjection.cs" />
+    <Compile Include="InvitationPhase\DTO\LobbyDTO.cs" />
+    <Compile Include="InvitationPhase\DTO\PlayerDTO.cs" />
     <Compile Include="InvitationPhase\StartGame.cs" />
     <Compile Include="InvitationPhase\Lobby.cs" />
     <Compile Include="InvitationPhase\AcceptInvitation.cs" />
-    <Compile Include="Gameplay\AttackTerritory.cs" />
-    <Compile Include="Gameplay\Board.cs" />
-    <Compile Include="Gameplay\Continent.cs" />
-    <Compile Include="Gameplay\EndTurn.cs" />
-    <Compile Include="Gameplay\ExchangeRiskCard.cs" />
-    <Compile Include="Gameplay\FortifyTerritory.cs" />
-    <Compile Include="Gameplay\Game.cs" />
-    <Compile Include="Gameplay\InfantryUnit.cs" />
-    <Compile Include="Gameplay\NeutralPlayer.cs" />
-    <Compile Include="Gameplay\PlaceInfantryUnit.cs" />
-    <Compile Include="Gameplay\Player.cs" />
-    <Compile Include="Gameplay\Territory.cs" />
-    <Compile Include="Gameplay\Turn.cs" />
-    <Compile Include="GameSetup\Games\Game.cs" />
-    <Compile Include="GameSetup\InfantryUnit.cs" />
-    <Compile Include="GameSetup\NeutralPlayer.cs" />
-    <Compile Include="GameSetup\Turns\PlaceInfantryUnit.cs" />
-    <Compile Include="GameSetup\Player.cs" />
-    <Compile Include="GameSetup\Turns\Turn.cs" />
+    <Compile Include="SetupPhase\GameSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GameSetup\Games\InfantryUnitPlaced.cs" />
+    <Compile Include="SetupPhase\InfantryUnitPlaced.cs" />
     <Compile Include="Infrastructure\IObserve.cs" />
     <Compile Include="Workflows\GameSetupStartedWorkflow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Gameplay\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

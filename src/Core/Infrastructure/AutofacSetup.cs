@@ -8,11 +8,16 @@
 
     using Core.InvitationPhase;
     using Core.InvitationPhase.Handlers;
+    using Core.SetupPhase;
+    using Core.SetupPhase.Handlers;
 
     using EventStore.ClientAPI;
 
     using MemBus;
     using MemBus.Configurators;
+
+    using Raven.Client;
+    using Raven.Client.Document;
 
     public class AutofacSetup
     {
@@ -35,6 +40,17 @@
                         .Construct();
                 }).As<IBus>();
 
+            builder.Register(x =>
+            {
+                var store = new DocumentStore { Url = "http://localhost:8080", DefaultDatabase = "Risk" };
+                store.Initialize();
+                return store;
+            }).As<IDocumentStore>().SingleInstance();
+
+            builder.Register(x => x.Resolve<IDocumentStore>().OpenSession())
+                .As<IDocumentSession>()
+                .InstancePerDependency();
+
             builder.RegisterAssemblyTypes(typeof(IObserve<>).Assembly).AsClosedTypesOf(typeof(IObserve<>));
 
             builder.RegisterType<GetEventStoreRepository>().As<IRepository>();
@@ -44,6 +60,9 @@
             builder.RegisterType<InvitePlayerHandler>().As<ICommandHandler<InvitePlayer>>();
             builder.RegisterType<LeaveLobbyHandler>().As<ICommandHandler<LeaveLobby>>();
             builder.RegisterType<StartGameHandler>().As<ICommandHandler<StartGame>>();
+
+            builder.RegisterType<StartGameSetupHandler>().As<ICommandHandler<StartGameSetup>>();
+            builder.RegisterType<PlaceInfantryUnitHandler>().As<ICommandHandler<PlaceInfantryUnit>>();
 
             builder.RegisterType<AutofacCommandHandlerResolver>().As<ICommandHandlerResolver>();
 

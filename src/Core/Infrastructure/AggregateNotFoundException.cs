@@ -4,9 +4,5 @@ namespace Core.Infrastructure
 
     public class AggregateNotFoundException : Exception
     {
-        public AggregateNotFoundException(Guid id, Type type)
-        {
-
-        }
     }
 }

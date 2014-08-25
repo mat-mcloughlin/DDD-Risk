@@ -6,19 +6,23 @@
 
     using CommonDomain.Core;
 
+    using Core.InvitationPhase.Exceptions;
+
     public class Lobby : AggregateBase
     {
+        const int MinNumberOfPlayers = 2;
+
         const int MaxNumberOfPlayers = 5;
 
         readonly Dictionary<Guid, Player> _invitedPlayers;
 
-        readonly Dictionary<Guid, Player> _joinedPlayers;
+        readonly Dictionary<Guid, string> _joinedPlayers;
 
         Guid _gameId;
 
         string _gameName;
 
-        KeyValuePair<Guid, string> _host;
+        Host _host;
 
         public Lobby(Guid lobbyId, Guid gameId, string gameName, Guid hostId, string hostName)
             : this()
@@ -29,7 +33,7 @@
         private Lobby()
         {
             _invitedPlayers = new Dictionary<Guid, Player>();
-            _joinedPlayers = new Dictionary<Guid, Player>();
+            _joinedPlayers = new Dictionary<Guid, string>();
         }
 
         public void InvitePlayer(Guid playerId, string playerName, Guid invitationToken)
@@ -42,23 +46,35 @@
             CheckInvitationTokenIsValid(invitationToken);
             CheckLobbyStillHasRoom();
 
-            RaiseEvent(new InvitationAccepted(invitationToken));
+            var player = _invitedPlayers[invitationToken];
+
+            RaiseEvent(new InvitationAccepted(Id, player.Id, player.Name, invitationToken));
         }
 
         public void LeaveLobby(Guid playerId)
         {
             if (_joinedPlayers.ContainsKey(playerId))
             {
-                RaiseEvent(new LeftLobby(playerId));
+                RaiseEvent(new LeftLobby(Id, playerId));
             }
         }
 
-        public void StartGame()
+        public void StartGame(Guid setupGameId)
         {
-            // Make sure min number of players joined (3)
+            CheckThereIsTheMinimumNumberOfPlayers();
+
             var players = _joinedPlayers.Keys.ToList();
-            players.Add(_host.Key);
-            RaiseEvent(new GameStarted(_gameId, _gameName, _joinedPlayers.Keys.ToList()));
+            players.Add(_host.Id);
+
+            RaiseEvent(new GameStarted(setupGameId, _gameId, _gameName, players));
+        }
+
+        void CheckThereIsTheMinimumNumberOfPlayers()
+        {
+            if (_joinedPlayers.Count < MinNumberOfPlayers)
+            {
+                throw new NotEnoughPlayersException();
+            }
         }
 
         void Apply(LobbyCreated e)
@@ -66,18 +82,17 @@
             Id = e.LobbyId;
             _gameId = e.GameId;
             _gameName = e.GameName;
-            _host = new KeyValuePair<Guid, string>(e.HostId, e.HostName);
+            _host = new Host(e.HostId, e.HostName);
         }
 
         void Apply(PlayerInvited e)
         {
-            _invitedPlayers.Add(e.PlayerId, new Player(e.PlayerName, e.InvitationToken));
+            _invitedPlayers.Add(e.InvitationToken, new Player(e.PlayerId, e.PlayerName));
         }
 
         void Apply(InvitationAccepted e)
         {
-            var player = _invitedPlayers.Single(p => p.Value.InvitationToken == e.InvitationToken);
-            _joinedPlayers.Add(player.Key, player.Value);
+            _joinedPlayers.Add(e.PlayerId, e.PlayerName);
         }
 
         void Apply(LeftLobby e)
@@ -100,7 +115,7 @@
 
         void CheckInvitationTokenIsValid(Guid invitationToken)
         {
-            var tokens = _invitedPlayers.Values.Select(p => p.InvitationToken);
+            var tokens = _invitedPlayers.Keys;
 
             if (!tokens.Contains(invitationToken))
             {

@@ -14,7 +14,7 @@
 //    public class EndingATurn
 //    {
 //        [Scenario]
-//        void Ending_a_turn_on_the_game(Game game)
+//        void Ending_a_turn_on_the_game(GameSetup game)
 //        {
 //            var turnGuid = new Guid("e9f5a7cf-161b-4f47-ba10-ad9413f5791e");
 //            var players = new Dictionary<Guid, string>();
@@ -40,7 +40,7 @@
 //            "A turn should be ended"
 //                .Then(() =>
 //                {
-//                    var startingPlayer = ((GameStarted)game.Events.First()).StartingPlayerId;
+//                    var startingPlayer = ((GameSetupStarted)game.Events.First()).StartingPlayerId;
 
 //                    var @event = (InfantryUnitPlaced)game.Events.Last();
 //                    @event.TurnId.ShouldBe(turnGuid);
@@ -52,7 +52,7 @@
 //        }
 
 //        [Scenario]
-//        void Turn_cannot_be_ended_due_to_incorrect_id(Game game)
+//        void Turn_cannot_be_ended_due_to_incorrect_id(GameSetup game)
 //        {
 //            "Given a game"
 //                .Given(() =>
@@ -77,14 +77,14 @@
 
 //        private static class TestableGame
 //        {
-//            public static Game Get(Guid turnGuid, Dictionary<Guid, string> players)
+//            public static GameSetup Get(Guid turnGuid, Dictionary<Guid, string> players)
 //            {
 //                var dice = new Dice();
 
 //                Func<Guid> guidGenerator = () => turnGuid;
 
-//                var command = new StartGame(Guid.NewGuid(), "test", players);
-//                return new Game(command, dice, guidGenerator);
+//                var command = new StartGameSetup(Guid.NewGuid(), "test", players);
+//                return new GameSetup(command, dice, guidGenerator);
 //            }
 //        }
 //    }

@@ -79,12 +79,12 @@ namespace Core.Infrastructure
 
                 if (currentSlice.Status == SliceReadStatus.StreamNotFound)
                 {
-                    throw new AggregateNotFoundException(id, typeof(TAggregate));
+                    throw new AggregateNotFoundException();
                 }
 
                 if (currentSlice.Status == SliceReadStatus.StreamDeleted)
                 {
-                    throw new AggregateDeletedException(id, typeof(TAggregate));
+                    throw new AggregateDeletedException();
                 }
 
                 sliceStart = currentSlice.NextEventNumber;
@@ -98,7 +98,7 @@ namespace Core.Infrastructure
 
             if (aggregate.Version != version && version < int.MaxValue)
             {
-                throw new AggregateVersionException(id, typeof(TAggregate), aggregate.Version, version);
+                throw new AggregateVersionException();
             }
 
             return aggregate;

@@ -15,10 +15,10 @@
             _repository = repository;
         }
 
-        public void Handle(StartGame command)
+        public void Handle(StartGame c)
         {
-            var lobby = _repository.GetById<Lobby>(command.LobbyId);
-            lobby.StartGame();
+            var lobby = _repository.GetById<Lobby>(c.LobbyId);
+            lobby.StartGame(c.SetupGameId);
             _repository.Save(lobby, Guid.NewGuid());
         }
     }

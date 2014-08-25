@@ -1,4 +1,4 @@
-namespace Core.InvitationPhase
+namespace Core.InvitationPhase.Exceptions
 {
     using System;
 

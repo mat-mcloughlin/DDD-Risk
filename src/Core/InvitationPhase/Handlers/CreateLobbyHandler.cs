@@ -15,9 +15,9 @@
             _repository = repository;
         }
 
-        public void Handle(CreateLobby command)
+        public void Handle(CreateLobby c)
         {
-            var lobby = new Lobby(command.LobbyId, command.GameId, command.GameName, command.HostId, command.HostName);
+            var lobby = new Lobby(c.LobbyId, c.GameId, c.GameName, c.HostId, c.HostName);
             _repository.Save(lobby, Guid.NewGuid());
         }
     }

@@ -15,10 +15,10 @@
             _repository = repository;
         }
 
-        public void Handle(AcceptInvitation command)
+        public void Handle(AcceptInvitation c)
         {
-            var lobby = _repository.GetById<Lobby>(command.LobbyId);
-            lobby.AcceptInvitation(command.InvitationToken);
+            var lobby = _repository.GetById<Lobby>(c.LobbyId);
+            lobby.AcceptInvitation(c.InvitationToken);
             _repository.Save(lobby, Guid.NewGuid());
         }
     }

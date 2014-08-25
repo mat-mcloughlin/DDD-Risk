@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using Core.InvitationPhase;
+    using Core.InvitationPhase.Exceptions;
 
     using Xbehave;
 

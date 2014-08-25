@@ -6,6 +6,7 @@
 
     using Core.Infrastructure;
 
+    // This should be validated to make sure its only the host can do it
     public class InvitePlayerHandler : ICommandHandler<InvitePlayer>
     {
         private readonly IRepository _repository;
@@ -15,10 +16,10 @@
             _repository = repository;
         }
 
-        public void Handle(InvitePlayer command)
+        public void Handle(InvitePlayer c)
         {
-            var lobby = _repository.GetById<Lobby>(command.LobbyId);
-            lobby.InvitePlayer(command.PlayerId, command.PlayerName, command.InvitationToken);
+            var lobby = _repository.GetById<Lobby>(c.LobbyId);
+            lobby.InvitePlayer(c.PlayerId, c.PlayerName, c.InvitationToken);
             _repository.Save(lobby, Guid.NewGuid());
         }
     }
