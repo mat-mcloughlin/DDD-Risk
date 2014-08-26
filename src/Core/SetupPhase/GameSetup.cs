@@ -63,7 +63,7 @@
             _board.Territories[e.Territory].NumberOfInfantryUnits++;
             _players[e.CurrentPlayerId]--;
 
-            _currentPlayerId = e.NextPlayer;
+            _currentPlayerId = e.NextPlayerId;
         }
 
         void CheckPlayerIsCurrentPlayer(Guid playerId)

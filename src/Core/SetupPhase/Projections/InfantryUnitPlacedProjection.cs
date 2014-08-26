@@ -1,25 +1,27 @@
-﻿namespace Core.InvitationPhase.Projections
+﻿namespace Core.SetupPhase.Projections
 {
     using System.Linq;
 
-    using Core.Infrastructure;
+    using Console;
+
     using Core.SetupPhase;
     using Core.SetupPhase.DTO;
 
-    using Raven.Client;
+    using MongoDB.Driver;
 
-    public class InfantryUnitPlacedProjection : IObserve<InfantryUnitPlaced>
+    public class InfantryUnitPlacedProjection : IConsume<InfantryUnitPlaced>
     {
-        private readonly IDocumentSession _session;
+        private readonly MongoDatabase _database;
 
-        public InfantryUnitPlacedProjection(IDocumentSession session)
+        public InfantryUnitPlacedProjection(MongoDatabase database)
         {
-            _session = session;
+            _database = database;
         }
 
-        public void Observe(InfantryUnitPlaced e)
+        public void Consume(InfantryUnitPlaced e)
         {
-            var boardStateDTO = _session.Load<BoardStateDTO>(e.GameSetupId);
+            var collection = this._database.GetCollection<BoardStateDTO>("BoardStateDTOs");
+            var boardStateDTO = collection.FindOneById(e.GameSetupId);
 
             var territory = boardStateDTO.Territories.FirstOrDefault(t => t.Name == e.Territory);
 
@@ -29,7 +31,7 @@
                 territory.NumberOfInfantryUnits++;
             }
 
-            _session.SaveChanges();
+            collection.Save(boardStateDTO);
         }
     }
 }

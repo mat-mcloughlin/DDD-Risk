@@ -2,9 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-
     using Autofac;
-
     using MemBus;
 
     public class AutofacAdaptor : IocAdapter

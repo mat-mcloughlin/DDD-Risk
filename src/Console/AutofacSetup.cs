@@ -1,11 +1,13 @@
-﻿namespace Core.Infrastructure
+﻿namespace Console
 {
     using System.Net;
+    using System.Reflection;
 
     using Autofac;
 
     using CommonDomain.Persistence;
 
+    using Core.Infrastructure;
     using Core.InvitationPhase;
     using Core.InvitationPhase.Handlers;
     using Core.SetupPhase;
@@ -16,8 +18,9 @@
     using MemBus;
     using MemBus.Configurators;
 
-    using Raven.Client;
-    using Raven.Client.Document;
+    using MongoDB.Driver;
+
+    using IBus = MemBus.IBus;
 
     public class AutofacSetup
     {
@@ -36,22 +39,23 @@
                 {
                     var context = c.Resolve<IComponentContext>();
                     return BusSetup.StartWith<Conservative>()
-                        .Apply<IoCSupport>(s => s.SetAdapter(new AutofacAdaptor(context)).SetHandlerInterface(typeof(IObserve<>)))
+                        .Apply<IoCSupport>(s => s.SetAdapter(new AutofacAdaptor(context)).SetHandlerInterface(typeof(IConsume<>)))
                         .Construct();
                 }).As<IBus>();
 
             builder.Register(x =>
             {
-                var store = new DocumentStore { Url = "http://localhost:8080", DefaultDatabase = "Risk" };
-                store.Initialize();
-                return store;
-            }).As<IDocumentStore>().SingleInstance();
+                var client = new MongoClient("mongodb://localhost");
+                return client.GetServer();
+            }).As<MongoServer>().SingleInstance();
 
-            builder.Register(x => x.Resolve<IDocumentStore>().OpenSession())
-                .As<IDocumentSession>()
+            builder.Register(x => x.Resolve<MongoServer>().GetDatabase("Risk"))
+                .As<MongoDatabase>()
                 .InstancePerDependency();
 
-            builder.RegisterAssemblyTypes(typeof(IObserve<>).Assembly).AsClosedTypesOf(typeof(IObserve<>));
+
+
+            builder.RegisterAssemblyTypes(typeof(IConsume<>).Assembly, Assembly.GetExecutingAssembly()).AsClosedTypesOf(typeof(IConsume<>));
 
             builder.RegisterType<GetEventStoreRepository>().As<IRepository>();
 
@@ -68,7 +72,9 @@
 
             builder.RegisterType<CommandDispatcher>().AsSelf();
 
-            return builder.Build();
+            var container = builder.Build();
+
+            return container;
         }
     }
 }

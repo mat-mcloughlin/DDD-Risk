@@ -1,21 +1,24 @@
 ﻿namespace Core.InvitationPhase.Projections
 {
-    using Core.Infrastructure;
+    using Console;
+
     using Core.InvitationPhase.DTO;
 
-    using Raven.Client;
+    using MongoDB.Driver;
 
-    public class LobbyCreatedProjection : IObserve<LobbyCreated>
+    public class LobbyCreatedProjection : IConsume<LobbyCreated>
     {
-        private readonly IDocumentSession _session;
+        private readonly MongoDatabase _database;
 
-        public LobbyCreatedProjection(IDocumentSession session)
+        public LobbyCreatedProjection(MongoDatabase database)
         {
-            _session = session;
+            _database = database;
         }
 
-        public void Observe(LobbyCreated e)
+        public void Consume(LobbyCreated e)
         {
+            var collection = _database.GetCollection<LobbyDTO>("LobbyDTOs");
+
             var lobbyDTO = new LobbyDTO
             {
                 Id = e.LobbyId,
@@ -25,8 +28,7 @@
                 HostName = e.HostName
             };
 
-            _session.Store(lobbyDTO);
-            _session.SaveChanges();
+            collection.Save(lobbyDTO);
         }
     }
 }

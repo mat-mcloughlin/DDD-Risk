@@ -1,22 +1,25 @@
 ﻿namespace Core.SetupPhase.Projections
 {
-    using Core.Infrastructure;
+    using Console;
+
     using Core.SetupPhase;
     using Core.SetupPhase.DTO;
 
-    using Raven.Client;
+    using MongoDB.Driver;
 
-    public class GameSetupStartedProjection : IObserve<GameSetupStarted>
+    public class GameSetupStartedProjection : IConsume<GameSetupStarted>
     {
-        private readonly IDocumentSession _session;
+        private readonly MongoDatabase _database;
 
-        public GameSetupStartedProjection(IDocumentSession session)
+        public GameSetupStartedProjection(MongoDatabase database)
         {
-            this._session = session;
+            _database = database;
         }
 
-        public void Observe(GameSetupStarted e)
+        public void Consume(GameSetupStarted e)
         {
+            var collection = _database.GetCollection<BoardStateDTO>("BoardStateDTOs");
+
             var boardStateDTO = new BoardStateDTO { Id = e.GameSetupId };
 
             foreach (var territory in e.Board.Territories)
@@ -24,8 +27,7 @@
                 boardStateDTO.Territories.Add(new TerritoryDTO { Name = territory.Key });
             }
 
-            this._session.Store(boardStateDTO);
-            this._session.SaveChanges();
+            collection.Save(boardStateDTO);
         }
     }
 }

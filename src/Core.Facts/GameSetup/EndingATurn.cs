@@ -45,8 +45,8 @@
 //                    var @event = (InfantryUnitPlaced)game.Events.Last();
 //                    @event.TurnId.ShouldBe(turnGuid);
 //                    @event.Board.ShouldNotBeNull();
-//                    players.Keys.ShouldContain(@event.NextPlayer);
-//                    @event.NextPlayer.ShouldNotBe(startingPlayer);
+//                    players.Keys.ShouldContain(@event.NextPlayerId);
+//                    @event.NextPlayerId.ShouldNotBe(startingPlayer);
 //                    @event.NumberOfInfantryUnitsLeft.ShouldBe(35);
 //                });
 //        }

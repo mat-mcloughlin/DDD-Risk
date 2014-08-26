@@ -1,24 +1,26 @@
 ﻿namespace Core.InvitationPhase.Projections
 {
-    using Core.Infrastructure;
+    using Console;
+
     using Core.InvitationPhase.DTO;
 
-    using Raven.Client;
+    using MongoDB.Driver;
 
-    public class InvitationAcceptedProjection : IObserve<InvitationAccepted>
+    public class InvitationAcceptedProjection : IConsume<InvitationAccepted>
     {
-        private readonly IDocumentSession _session;
+        private readonly MongoDatabase _database;
 
-        public InvitationAcceptedProjection(IDocumentSession session)
+        public InvitationAcceptedProjection(MongoDatabase database)
         {
-            this._session = session;
+            _database = database;
         }
 
-        public void Observe(InvitationAccepted e)
+        public void Consume(InvitationAccepted e)
         {
-            var lobbyDTO = _session.Load<LobbyDTO>(e.LobbyId);
+            var collection = _database.GetCollection<LobbyDTO>("LobbyDTOs");
+            var lobbyDTO = collection.FindOneById(e.LobbyId);
             lobbyDTO.Players.Add(new PlayerDTO { Id = e.PlayerId, Name = e.PlayerName });
-            _session.SaveChanges();
+            collection.Save(lobbyDTO);
         }
     }
 }
